@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Numero:"/>
+
+            <EditText
+                android:id="@+id/numero_musica"
+                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_weight="1"
+                android:inputType="number"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <CheckedTextView
+                android:id="@+id/entrada"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Entrada" />
+
+            <CheckedTextView
+                android:id="@+id/aleluia"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Aleluia" />
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <CheckedTextView
+                android:id="@+id/acto_penitencial"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Acto Penitencial" />
+
+            <CheckedTextView
+                android:id="@+id/ofertorio"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Ofertório" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckedTextView
+                android:id="@+id/santo"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Santo" />
+
+            <CheckedTextView
+                android:id="@+id/pai_nosso"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Pai-Nosso" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckedTextView
+                android:id="@+id/paz"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Paz" />
+
+            <CheckedTextView
+                android:id="@+id/comunhao"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Comunhão" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckedTextView
+                android:id="@+id/accao_gracas"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Acção de Graças" />
+
+            <CheckedTextView
+                android:id="@+id/final_"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="true"
+                android:checked="false"
+                android:gravity="center"
+                android:textColorHint="#FFFFFF"
+                android:hint="Final" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="OK"/>
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Cancel" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Gera Programas</string>
+
+    <string name="title_activity_programa">Programa</string>
+    <string name="title_activity_lista_musicas">Lista de Musicas</string>
+
+    <string-array name="planets_array">
+        <item>Acto Penitencial</item>
+        <item>Pai-nosso</item>
+        <item>Acção de Graças</item>
+    </string-array>
+
+</resources>
