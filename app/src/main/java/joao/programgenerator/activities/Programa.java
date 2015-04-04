@@ -109,6 +109,8 @@ public class Programa extends ActionBarActivity {
     }
 
     private void generatePrograma(){
+
+        // Geração dos números random
         int prog_entrada = returnMusicNumber(1);
         int prog_aleluia = returnMusicNumber(2);
         int prog_ofertorio = returnMusicNumber(4);
