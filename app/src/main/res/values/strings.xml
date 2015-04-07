@@ -2,7 +2,31 @@
     <string name="app_name">Gera Programas</string>
 
     <string name="title_activity_programa">Programa</string>
-    <string name="title_activity_lista_musicas">Lista de Musicas</string>
+    <string name="title_activity_lista_musicas">Lista de Músicas</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="apagar_musica_titulo">Apagar música</string>
+    <string name="nova_musica">Nova musica</string>
+    <string name="apagar_musica_texto">De certeza que queres apagar esta música?</string>
+    <string name="musica_definida">Não tem nenhuma música definida para esta parte</string>
+    <string name="campos_obrigatorios">ERRO!!! Todos os campos são obrigatórios.</string>
+    <string name="gerar_programa">Gerar Programa</string>
+    <string name="gerar_programa_especial">Gerar Programa Especial</string>
+    <string name="entrada">Entrada</string>
+    <string name="aleluia">Aleluia</string>
+    <string name="acto_penitencial">Acto Penitencial</string>
+    <string name="ofertorio">Ofertório</string>
+    <string name="santo">Santo</string>
+    <string name="pai_nosso">Pai-Nosso</string>
+    <string name="paz">Paz</string>
+    <string name="comunhao">Comunhão</string>
+    <string name="accao_gracas">Acção de Graças</string>
+    <string name="final_">Final</string>
+    <string name="numero">Número:</string>
+    <string name="ok">OK</string>
+    <string name="cancelar">Cancelar</string>
+
+
 
     <string-array name="planets_array">
         <item>Acto Penitencial</item>

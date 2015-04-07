@@ -20,7 +20,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Entrada"/>
+                android:text="@string/entrada"/>
 
             <TextView
                 android:id="@+id/entrada"
@@ -37,7 +37,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Aleluia"/>
+                android:text="@string/aleluia"/>
 
             <TextView
                 android:id="@+id/aleluia"
@@ -56,7 +56,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Acto Penitencial"/>
+                android:text="@string/acto_penitencial"/>
 
             <TextView
                 android:id="@+id/acto_penitencial"
@@ -73,7 +73,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Ofertório"/>
+                android:text="@string/ofertorio"/>
 
             <TextView
                 android:id="@+id/ofertorio"
@@ -90,7 +90,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Santo"/>
+                android:text="@string/santo"/>
 
             <TextView
                 android:id="@+id/santo"
@@ -109,7 +109,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Pai-nosso"/>
+                android:text="@string/pai_nosso"/>
 
             <TextView
                 android:id="@+id/pai_nosso"
@@ -126,7 +126,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Paz"/>
+                android:text="@string/paz"/>
 
             <TextView
                 android:id="@+id/paz"
@@ -143,7 +143,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Comunhão"/>
+                android:text="@string/comunhao"/>
 
             <TextView
                 android:id="@+id/comunhao"
@@ -162,7 +162,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Acção de Graças"/>
+                android:text="@string/accao_gracas"/>
 
             <TextView
                 android:id="@+id/accao_gracas"
@@ -179,7 +179,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
-                android:text="Final"/>
+                android:text="@string/final_"/>
 
             <TextView
                 android:id="@+id/last"

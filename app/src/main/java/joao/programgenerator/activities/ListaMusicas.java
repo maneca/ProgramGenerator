@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
@@ -27,7 +28,9 @@ import joao.programgenerator.database.PartesEucaristiaHandler;
 import joao.programgenerator.database.PartesMusicaHandler;
 
 
-public class ListaMusicas extends ActionBarActivity {
+
+
+public class ListaMusicas extends ActionBarActivity implements AdapterView.OnItemLongClickListener{
 
     private ExpandableListAdapter listAdapter;
     private ExpandableListView listview;
@@ -50,6 +53,10 @@ public class ListaMusicas extends ActionBarActivity {
 
         // setting list adapter
         listview.setAdapter(listAdapter);
+
+        listview.setOnItemLongClickListener(this);
+
+
     }
 
     private void prepareListData() {
@@ -83,7 +90,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         Cursor cursor = musica_handler.getMusicasForParte(1);
         if(cursor.getCount() == 0)
-            entrada.add("Não tem nenhuma música definida para esta parte");
+            entrada.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -99,7 +106,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         cursor = musica_handler.getMusicasForParte(2);
         if(cursor.getCount() == 0)
-            aleluia.add("Não tem nenhuma música definida para esta parte");
+            aleluia.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -115,7 +122,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         cursor = musica_handler.getMusicasForParte(3);
         if(cursor.getCount() == 0)
-            acto_penitencial.add("Não tem nenhuma música definida para esta parte");
+            acto_penitencial.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -131,7 +138,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         cursor = musica_handler.getMusicasForParte(4);
         if(cursor.getCount() == 0)
-            ofertorio.add("Não tem nenhuma música definida para esta parte");
+            ofertorio.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -147,7 +154,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         cursor = musica_handler.getMusicasForParte(5);
         if(cursor.getCount() == 0)
-            santo.add("Não tem nenhuma música definida para esta parte");
+            santo.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -163,7 +170,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         cursor = musica_handler.getMusicasForParte(6);
         if(cursor.getCount() == 0)
-            pai_nosso.add("Não tem nenhuma música definida para esta parte");
+            pai_nosso.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -179,7 +186,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         cursor = musica_handler.getMusicasForParte(7);
         if(cursor.getCount() == 0)
-            paz.add("Não tem nenhuma música definida para esta parte");
+            paz.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -195,7 +202,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         cursor = musica_handler.getMusicasForParte(8);
         if(cursor.getCount() == 0)
-            comunhao.add("Não tem nenhuma música definida para esta parte");
+            comunhao.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -211,7 +218,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         cursor = musica_handler.getMusicasForParte(9);
         if(cursor.getCount() == 0)
-            accao_gracas.add("Não tem nenhuma música definida para esta parte");
+            accao_gracas.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -227,7 +234,7 @@ public class ListaMusicas extends ActionBarActivity {
 
         cursor = musica_handler.getMusicasForParte(10);
         if(cursor.getCount() == 0)
-            final_.add("Não tem nenhuma música definida para esta parte");
+            final_.add(getString(R.string.musica_definida));
         else{
             cursor.moveToFirst();
 
@@ -290,7 +297,7 @@ public class ListaMusicas extends ActionBarActivity {
         final EditText numero;
         final CheckedTextView entrada , aleluia, acto_penitencial, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
 
-        dialog.setTitle("Nova musica");
+        dialog.setTitle(R.string.nova_musica);
 
         dialog.show();
 
@@ -395,54 +402,54 @@ public class ListaMusicas extends ActionBarActivity {
                         (!entrada.isChecked() && !aleluia.isChecked() && !acto_penitencial.isChecked() &&
                          !ofertorio.isChecked() && !santo.isChecked() && !pai_nosso.isChecked() &&
                          !paz.isChecked() && !comunhao.isChecked() && !accao_gracas.isChecked() && !final_.isChecked()))
-                    Toast.makeText(getApplicationContext(), "ERRO!!! Todos os campos são obrigatórios.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.campos_obrigatorios), Toast.LENGTH_LONG).show();
                 else{
                     int number = Integer.parseInt(musica);
                     if(entrada.isChecked()) {
                         musica_handler.insertParteMusica(1, number);
-                        listDataChild.get(listDataHeader.get(0)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(0)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(0)).add(musica);
                     }
 
                     if(aleluia.isChecked()) {
                         musica_handler.insertParteMusica(2, number);
-                        listDataChild.get(listDataHeader.get(1)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(1)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(1)).add(musica);
                     }
 
                     if(acto_penitencial.isChecked()) {
                         musica_handler.insertParteMusica(3, number);
-                        listDataChild.get(listDataHeader.get(2)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(2)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(2)).add(musica);
                     }
 
                     if(ofertorio.isChecked()) {
                         musica_handler.insertParteMusica(4, number);
-                        listDataChild.get(listDataHeader.get(3)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(3)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(3)).add(musica);
                     }
 
                     if(santo.isChecked()) {
                         musica_handler.insertParteMusica(5, number);
-                        listDataChild.get(listDataHeader.get(4)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(4)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(4)).add(musica);
                     }
 
                     if(pai_nosso.isChecked()) {
                         musica_handler.insertParteMusica(6, number);
-                        listDataChild.get(listDataHeader.get(5)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(5)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(5)).add(musica);
                     }
 
                     if(paz.isChecked()) {
                         musica_handler.insertParteMusica(7, number);
-                        listDataChild.get(listDataHeader.get(6)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(6)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(6)).add(musica);
                     }
 
                     if(comunhao.isChecked()) {
                         musica_handler.insertParteMusica(8, number);
-                        listDataChild.get(listDataHeader.get(7)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(7)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(7)).add(musica);
                     }
 
@@ -479,31 +486,60 @@ public class ListaMusicas extends ActionBarActivity {
 
         final View view = v;
 
-        AlertDialog dialog = new AlertDialog.Builder(this).create();
-        dialog.setTitle("Apagar música");
-        dialog.setMessage("De certeza que queres apagar esta música?");
-        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-                Log.d("cenas", "" + view.getParent());
-
-
-            }
-        });
-
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-
-        dialog.show();
     }
 
 
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+        ExpandableListView listView = (ExpandableListView) parent;
+        long pos = listView.getExpandableListPosition(position);
+
+        // get type and correct positions
+        int itemType = ExpandableListView.getPackedPositionType(pos);
+        final int groupPos = ExpandableListView.getPackedPositionGroup(pos);
+        final int childPos = ExpandableListView.getPackedPositionChild(pos);
+
+        // if child is long-clicked
+        if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+            AlertDialog dialog = new AlertDialog.Builder(this).create();
+            dialog.setTitle(getString(R.string.apagar_musica_titulo));
+            dialog.setMessage(getString(R.string.apagar_musica_texto));
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.sim), new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                    int musica = Integer.parseInt((String) listAdapter.getChild(groupPos, childPos));
+
+                    PartesMusicaHandler musicaHandler = new PartesMusicaHandler(getApplicationContext());
+
+                    musicaHandler.open();
+
+                    boolean cenas = musicaHandler.removeParteMusica(groupPos+1, musica);
+                    listview.collapseGroup(groupPos);
+
+                    listDataChild.get(listDataHeader.get(groupPos)).remove(listAdapter.getChild(groupPos, childPos));
+
+                    musicaHandler.close();
+
+                }
+            });
+
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.nao), new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
+
+            dialog.show();
+
+
+        }
+        return false;
+    }
 }

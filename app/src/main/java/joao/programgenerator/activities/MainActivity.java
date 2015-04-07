@@ -29,6 +29,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         gerar.setOnClickListener(this);
         gerar_especial.setOnClickListener(this);
         listar.setOnClickListener(this);
+
     }
 
     @Override
@@ -38,7 +39,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.gerar:    Intent intent = new Intent(MainActivity.this, Programa.class);
                                 startActivity(intent);
 
-                                //finish();
                                 break;
 
             case R.id.gerar_especial:   final ArrayList mSelectedItems = new ArrayList();  // Where we track the selected items
@@ -70,7 +70,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                                                 startActivity(intent);
 
-                                                //finish();
                                             }
                                         })
                                         .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -88,7 +87,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.listar:   Intent listagem = new Intent(MainActivity.this, ListaMusicas.class);
 
                                 startActivity(listagem);
-                                //finish();
+
                                 break;
         }
     }

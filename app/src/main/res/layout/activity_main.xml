@@ -13,7 +13,7 @@
         android:layout_width="225dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Gerar Programa"
+        android:text="@string/gerar_programa"
         android:id="@+id/gerar"
         android:layout_gravity="center"
         android:layout_marginTop="95dp" />
@@ -23,13 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
-        android:text="Gerar Programa Especial"
+        android:text="@string/gerar_programa_especial"
         android:id="@+id/gerar_especial" />
 
     <Button
         android:layout_width="225dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Lista de Músicas"
+        android:text="@string/title_activity_lista_musicas"
         android:id="@+id/listar" />
 </LinearLayout>

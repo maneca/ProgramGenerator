@@ -9,7 +9,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_height="match_parent"
@@ -17,7 +18,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Numero:"/>
+                android:text="@string/numero"/>
 
             <EditText
                 android:id="@+id/numero_musica"
@@ -32,7 +33,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp">
 
             <CheckedTextView
                 android:id="@+id/entrada"
@@ -43,8 +44,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Entrada" />
+                android:hint="@string/entrada" />
 
             <CheckedTextView
                 android:id="@+id/aleluia"
@@ -55,8 +55,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Aleluia" />
+                android:hint="@string/aleluia" />
         </LinearLayout>
 
     <LinearLayout
@@ -73,8 +72,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Acto Penitencial" />
+                android:hint="@string/acto_penitencial" />
 
             <CheckedTextView
                 android:id="@+id/ofertorio"
@@ -85,8 +83,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Ofertório" />
+                android:hint="@string/ofertorio" />
         </LinearLayout>
 
         <LinearLayout
@@ -103,8 +100,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Santo" />
+                android:hint="@string/santo" />
 
             <CheckedTextView
                 android:id="@+id/pai_nosso"
@@ -115,8 +111,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Pai-Nosso" />
+                android:hint="@string/pai_nosso" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -132,8 +127,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Paz" />
+                android:hint="@string/paz" />
 
             <CheckedTextView
                 android:id="@+id/comunhao"
@@ -144,8 +138,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Comunhão" />
+                android:hint="@string/comunhao" />
         </LinearLayout>
 
         <LinearLayout
@@ -162,8 +155,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Acção de Graças" />
+                android:hint="@string/accao_gracas" />
 
             <CheckedTextView
                 android:id="@+id/final_"
@@ -174,14 +166,13 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:textColorHint="#FFFFFF"
-                android:hint="Final" />
+                android:hint="@string/final_" />
 
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -190,14 +181,14 @@
             android:layout_width="125dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="OK"/>
+            android:text="@string/ok"/>
 
         <Button
             android:id="@+id/cancel"
             android:layout_width="125dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:text="@string/cancelar" />
 
     </LinearLayout>
 
