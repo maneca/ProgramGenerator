@@ -109,15 +109,29 @@ public class Programa extends ActionBarActivity {
     }
 
     private void generatePrograma(){
+        ArrayList<Integer> programa = new ArrayList<Integer>();
 
         // Geração dos números random
         int prog_entrada = returnMusicNumber(1);
-        int prog_aleluia = returnMusicNumber(2);
-        int prog_ofertorio = returnMusicNumber(4);
-        int prog_santo = returnMusicNumber(5);
-        int prog_paz = returnMusicNumber(7);
-        int prog_comunhao = returnMusicNumber(8);
-        int prog_final = returnMusicNumber(10);
+        programa.add(prog_entrada);
+
+        int prog_aleluia = solveDuplicate(returnMusicNumber(2), programa, 2);
+        programa.add(prog_aleluia);
+
+        int prog_ofertorio = solveDuplicate(returnMusicNumber(4), programa, 4);
+        programa.add(prog_ofertorio);
+
+        int prog_santo = solveDuplicate(returnMusicNumber(5), programa, 5);
+        programa.add(prog_santo);
+
+        int prog_paz = solveDuplicate(returnMusicNumber(7), programa, 7);
+        programa.add(prog_paz);
+
+        int prog_comunhao = solveDuplicate(returnMusicNumber(8), programa, 8);
+        programa.add(prog_comunhao);
+
+        int prog_final = solveDuplicate(returnMusicNumber(10), programa, 10);
+        programa.add(prog_final);
 
         if(prog_entrada == -1)
             entrada.setText("ND");
@@ -128,9 +142,12 @@ public class Programa extends ActionBarActivity {
         else aleluia.setText(""+prog_aleluia);
 
         if(acto_penitencial.getVisibility() == View.VISIBLE){
-            if(returnMusicNumber(3) == -1)
+            int prog_acto = solveDuplicate(returnMusicNumber(3), programa, 3);
+            programa.add(prog_acto);
+
+            if( prog_acto == -1)
                 acto_penitencial.setText("ND");
-            else acto_penitencial.setText(""+returnMusicNumber(3));
+            else acto_penitencial.setText(""+prog_acto);
         }
 
         if(prog_ofertorio == -1)
@@ -142,9 +159,12 @@ public class Programa extends ActionBarActivity {
         else santo.setText(""+prog_santo);
 
         if(pai_nosso.getVisibility() == View.VISIBLE){
-            if(returnMusicNumber(6) == -1)
+            int prog_pai_nosso = solveDuplicate(returnMusicNumber(6), programa, 6);
+            programa.add(prog_pai_nosso);
+
+            if(prog_pai_nosso == -1)
                 pai_nosso.setText("ND");
-            else pai_nosso.setText(""+returnMusicNumber(6));
+            else pai_nosso.setText(""+prog_pai_nosso);
         }
 
         if(prog_paz == -1)
@@ -156,14 +176,27 @@ public class Programa extends ActionBarActivity {
         else comunhao.setText(""+prog_comunhao);
 
         if(accao_gracas.getVisibility() == View.VISIBLE){
-            if(returnMusicNumber(9) == -1)
+            int prog_accao_gracas = solveDuplicate(returnMusicNumber(9), programa, 9);
+            programa.add(prog_accao_gracas);
+
+            if(prog_accao_gracas == -1)
                 accao_gracas.setText("ND");
-            else accao_gracas.setText(""+returnMusicNumber(9));
+            else accao_gracas.setText(""+prog_accao_gracas);
         }
 
         if(prog_final == -1)
             final_.setText("ND");
         else final_.setText(""+prog_final);
+    }
+
+    private int solveDuplicate(int number, ArrayList<Integer> programa, int pos){
+        int new_number = -1;
+
+        if(programa.indexOf(number) != -1 ){
+            new_number = returnMusicNumber(pos);
+        }else new_number = number;
+
+        return new_number;
     }
 
     private int generateRandomNumber(int minimum, int maximum){

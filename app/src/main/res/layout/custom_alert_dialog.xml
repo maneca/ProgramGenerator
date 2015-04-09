@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
 
 
 
@@ -18,6 +19,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FFFFFF"
                 android:text="@string/numero"/>
 
             <EditText
@@ -44,7 +46,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/entrada" />
+                android:hint="@string/entrada"
+                android:textColorHint="#FFFFFF"/>
 
             <CheckedTextView
                 android:id="@+id/aleluia"
@@ -55,7 +58,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/aleluia" />
+                android:hint="@string/aleluia"
+                android:textColorHint="#FFFFFF"/>
         </LinearLayout>
 
     <LinearLayout
@@ -72,7 +76,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/acto_penitencial" />
+                android:hint="@string/acto_penitencial"
+                android:textColorHint="#FFFFFF"/>
 
             <CheckedTextView
                 android:id="@+id/ofertorio"
@@ -83,7 +88,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/ofertorio" />
+                android:hint="@string/ofertorio"
+                android:textColorHint="#FFFFFF"/>
         </LinearLayout>
 
         <LinearLayout
@@ -100,7 +106,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/santo" />
+                android:hint="@string/santo"
+                android:textColorHint="#FFFFFF"/>
 
             <CheckedTextView
                 android:id="@+id/pai_nosso"
@@ -111,7 +118,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/pai_nosso" />
+                android:hint="@string/pai_nosso"
+                android:textColorHint="#FFFFFF"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -127,7 +135,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/paz" />
+                android:hint="@string/paz"
+                android:textColorHint="#FFFFFF"/>
 
             <CheckedTextView
                 android:id="@+id/comunhao"
@@ -138,7 +147,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/comunhao" />
+                android:hint="@string/comunhao"
+                android:textColorHint="#FFFFFF"/>
         </LinearLayout>
 
         <LinearLayout
@@ -155,7 +165,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/accao_gracas" />
+                android:hint="@string/accao_gracas"
+                android:textColorHint="#FFFFFF"/>
 
             <CheckedTextView
                 android:id="@+id/final_"
@@ -166,7 +177,8 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/final_" />
+                android:hint="@string/final_"
+                android:textColorHint="#FFFFFF"/>
 
     </LinearLayout>
 
