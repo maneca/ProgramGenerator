@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:layout_height="match_parent">
 
 
 
@@ -19,7 +18,6 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#FFFFFF"
                 android:text="@string/numero"/>
 
             <EditText
@@ -46,26 +44,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/entrada"
-                android:textColorHint="#FFFFFF"/>
-
-            <CheckedTextView
-                android:id="@+id/aleluia"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                android:clickable="true"
-                android:checked="false"
-                android:gravity="center"
-                android:hint="@string/aleluia"
-                android:textColorHint="#FFFFFF"/>
-        </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                android:hint="@string/entrada"/>
 
             <CheckedTextView
                 android:id="@+id/acto_penitencial"
@@ -76,8 +55,25 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/acto_penitencial"
-                android:textColorHint="#FFFFFF"/>
+                android:hint="@string/acto_penitencial"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckedTextView
+            android:id="@+id/aleluia"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:clickable="true"
+            android:checked="false"
+            android:gravity="center"
+            android:hint="@string/aleluia"/>
 
             <CheckedTextView
                 android:id="@+id/ofertorio"
@@ -88,8 +84,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/ofertorio"
-                android:textColorHint="#FFFFFF"/>
+                android:hint="@string/ofertorio"/>
         </LinearLayout>
 
         <LinearLayout
@@ -106,8 +101,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/santo"
-                android:textColorHint="#FFFFFF"/>
+                android:hint="@string/santo"/>
 
             <CheckedTextView
                 android:id="@+id/pai_nosso"
@@ -118,8 +112,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/pai_nosso"
-                android:textColorHint="#FFFFFF"/>
+                android:hint="@string/pai_nosso"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -135,8 +128,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/paz"
-                android:textColorHint="#FFFFFF"/>
+                android:hint="@string/paz"/>
 
             <CheckedTextView
                 android:id="@+id/comunhao"
@@ -147,8 +139,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/comunhao"
-                android:textColorHint="#FFFFFF"/>
+                android:hint="@string/comunhao"/>
         </LinearLayout>
 
         <LinearLayout
@@ -165,8 +156,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/accao_gracas"
-                android:textColorHint="#FFFFFF"/>
+                android:hint="@string/accao_gracas"/>
 
             <CheckedTextView
                 android:id="@+id/final_"
@@ -177,8 +167,7 @@
                 android:clickable="true"
                 android:checked="false"
                 android:gravity="center"
-                android:hint="@string/final_"
-                android:textColorHint="#FFFFFF"/>
+                android:hint="@string/final_"/>
 
     </LinearLayout>
 

@@ -25,6 +25,8 @@
     <string name="numero">Número:</string>
     <string name="ok">OK</string>
     <string name="cancelar">Cancelar</string>
+    <string name="help_title">Ajuda</string>
+    <string name="help_message">Para apagar uma musica, clique durante algum tempo na música que deseja apagar.</string>
 
 
 

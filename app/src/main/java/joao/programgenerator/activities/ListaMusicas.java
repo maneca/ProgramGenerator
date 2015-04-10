@@ -280,9 +280,32 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
                                         return customAlertDialog();
 
+            case R.id.action_help:      return helpDialog();
+
             default:	return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private boolean helpDialog(){
+
+        AlertDialog dialog = new AlertDialog.Builder(this).create();
+        dialog.setTitle(getString(R.string.help_title));
+        dialog.setMessage(getString(R.string.help_message));
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        dialog.show();
+
+        return true;
+
+
     }
 
     private boolean customAlertDialog(){

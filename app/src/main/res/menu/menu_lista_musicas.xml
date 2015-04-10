@@ -4,10 +4,14 @@
 
     tools:context="joao.programgenerator.activities.ListaMusicas">
 
+    <item android:id="@+id/action_help"
+        android:title="Add"
+        android:icon="@drawable/ic_action_help"
+        yourapp:showAsAction="always"/>
+
     <item android:id="@+id/action_addmusic"
         android:title="Add"
         android:icon="@drawable/ic_action_new"
         yourapp:showAsAction="always"/>
-
 
 </menu>

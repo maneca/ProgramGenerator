@@ -30,23 +30,6 @@
             </TextView>
         </TableRow>
 
-        <TableRow android:padding="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#A4C739"
-                android:textStyle="bold"
-                android:text="@string/aleluia"/>
-
-            <TextView
-                android:id="@+id/aleluia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge">
-            </TextView>
-        </TableRow>
-
         <TableRow android:id="@+id/row_acto"
             android:padding="10dp">
             <TextView
@@ -60,6 +43,23 @@
 
             <TextView
                 android:id="@+id/acto_penitencial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge">
+            </TextView>
+        </TableRow>
+
+        <TableRow android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#A4C739"
+                android:textStyle="bold"
+                android:text="@string/aleluia"/>
+
+            <TextView
+                android:id="@+id/aleluia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge">
