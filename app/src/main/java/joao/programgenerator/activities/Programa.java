@@ -115,7 +115,7 @@ public class Programa extends ActionBarActivity {
         int prog_entrada = returnMusicNumber(1);
         programa.add(prog_entrada);
 
-        int prog_aleluia = solveDuplicate(returnMusicNumber(2), programa, 2);
+        int prog_aleluia = solveDuplicate(returnMusicNumber(3), programa, 3);
         programa.add(prog_aleluia);
 
         int prog_ofertorio = solveDuplicate(returnMusicNumber(4), programa, 4);
@@ -142,7 +142,7 @@ public class Programa extends ActionBarActivity {
         else aleluia.setText(""+prog_aleluia);
 
         if(acto_penitencial.getVisibility() == View.VISIBLE){
-            int prog_acto = solveDuplicate(returnMusicNumber(3), programa, 3);
+            int prog_acto = solveDuplicate(returnMusicNumber(2), programa, 2);
             programa.add(prog_acto);
 
             if( prog_acto == -1)

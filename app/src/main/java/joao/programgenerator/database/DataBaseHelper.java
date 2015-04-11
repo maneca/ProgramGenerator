@@ -49,8 +49,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.execSQL(CREATE_TABLE_PARTE_MUSICA);
 
             db.execSQL("INSERT INTO "+PARTES_TABLE_NAME+" ("+PARTE_NAME+") VALUES ('Entrada');");           // 1
-            db.execSQL("INSERT INTO "+PARTES_TABLE_NAME+" ("+PARTE_NAME+") VALUES ('Aleluia');");           // 2
-            db.execSQL("INSERT INTO "+PARTES_TABLE_NAME+" ("+PARTE_NAME+") VALUES ('Acto Penitencial');");  // 3
+            db.execSQL("INSERT INTO "+PARTES_TABLE_NAME+" ("+PARTE_NAME+") VALUES ('Acto Penitencial');");  // 2
+            db.execSQL("INSERT INTO "+PARTES_TABLE_NAME+" ("+PARTE_NAME+") VALUES ('Aleluia');");           // 3
             db.execSQL("INSERT INTO "+PARTES_TABLE_NAME+" ("+PARTE_NAME+") VALUES ('Ofertório');");         // 4
             db.execSQL("INSERT INTO "+PARTES_TABLE_NAME+" ("+PARTE_NAME+") VALUES ('Santo');");             // 5
             db.execSQL("INSERT INTO "+PARTES_TABLE_NAME+" ("+PARTE_NAME+") VALUES ('Pai-Nosso');");         // 6

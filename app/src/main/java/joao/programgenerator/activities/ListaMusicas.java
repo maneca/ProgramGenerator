@@ -101,26 +101,10 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
             }
         }
 
-        // ALELUIA
-        List<String> aleluia= new ArrayList<String>();
-
-        cursor = musica_handler.getMusicasForParte(2);
-        if(cursor.getCount() == 0)
-            aleluia.add(getString(R.string.musica_definida));
-        else{
-            cursor.moveToFirst();
-
-            while(!cursor.isAfterLast()){
-
-                aleluia.add("" + cursor.getInt(0));
-                cursor.moveToNext();
-            }
-        }
-
         // ACTO PENITENCIAL
         List<String> acto_penitencial= new ArrayList<String>();
 
-        cursor = musica_handler.getMusicasForParte(3);
+        cursor = musica_handler.getMusicasForParte(2);
         if(cursor.getCount() == 0)
             acto_penitencial.add(getString(R.string.musica_definida));
         else{
@@ -129,6 +113,22 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
             while(!cursor.isAfterLast()){
 
                 acto_penitencial.add(""+cursor.getInt(0));
+                cursor.moveToNext();
+            }
+        }
+
+        // ALELUIA
+        List<String> aleluia= new ArrayList<String>();
+
+        cursor = musica_handler.getMusicasForParte(3);
+        if(cursor.getCount() == 0)
+            aleluia.add(getString(R.string.musica_definida));
+        else{
+            cursor.moveToFirst();
+
+            while(!cursor.isAfterLast()){
+
+                aleluia.add("" + cursor.getInt(0));
                 cursor.moveToNext();
             }
         }
@@ -249,8 +249,8 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         musica_handler.close();
 
         listDataChild.put(listDataHeader.get(0), entrada); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), aleluia);
-        listDataChild.put(listDataHeader.get(2), acto_penitencial);
+        listDataChild.put(listDataHeader.get(1), acto_penitencial);
+        listDataChild.put(listDataHeader.get(2), aleluia);
         listDataChild.put(listDataHeader.get(3), ofertorio);
         listDataChild.put(listDataHeader.get(4), santo);
         listDataChild.put(listDataHeader.get(5), pai_nosso);
@@ -349,17 +349,17 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
             }
         });
 
-        aleluia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aleluia.toggle();
-            }
-        });
-
         acto_penitencial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 acto_penitencial.toggle();
+            }
+        });
+
+        aleluia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                aleluia.toggle();
             }
         });
 
@@ -434,13 +434,13 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
                         listDataChild.get(listDataHeader.get(0)).add(musica);
                     }
 
-                    if(aleluia.isChecked()) {
+                    if(acto_penitencial.isChecked()) {
                         musica_handler.insertParteMusica(2, number);
                         listDataChild.get(listDataHeader.get(1)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(1)).add(musica);
                     }
 
-                    if(acto_penitencial.isChecked()) {
+                    if(aleluia.isChecked()) {
                         musica_handler.insertParteMusica(3, number);
                         listDataChild.get(listDataHeader.get(2)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(2)).add(musica);
@@ -505,13 +505,6 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         return true;
     }
 
-    public void removeOnClickHandler(View v){
-
-        final View view = v;
-
-
-    }
-
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -540,7 +533,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
                     musicaHandler.open();
 
-                    boolean cenas = musicaHandler.removeParteMusica(groupPos+1, musica);
+                    musicaHandler.removeParteMusica(groupPos+1, musica);
                     listview.collapseGroup(groupPos);
 
                     listDataChild.get(listDataHeader.get(groupPos)).remove(listAdapter.getChild(groupPos, childPos));
