@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Random Set</string>
+    <string name="app_name">Gera Programas</string>
 
     <string name="title_activity_programa">Programa</string>
     <string name="title_activity_lista_musicas">Lista de Músicas</string>
