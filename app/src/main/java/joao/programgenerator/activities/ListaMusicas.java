@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -315,7 +313,6 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.custom_alert_dialog);
-        //dialog.setView(inflater.inflate(R.layout.custom_alert_dialog, null));
 
         final EditText numero;
         final CheckedTextView entrada , aleluia, acto_penitencial, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
@@ -478,13 +475,13 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
                     if(accao_gracas.isChecked()) {
                         musica_handler.insertParteMusica(9, number);
-                        listDataChild.get(listDataHeader.get(8)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(8)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(8)).add(musica);
                     }
 
                     if(final_.isChecked()) {
                         musica_handler.insertParteMusica(10, number);
-                        listDataChild.get(listDataHeader.get(9)).remove("Não tem nenhuma música definida para esta parte");
+                        listDataChild.get(listDataHeader.get(9)).remove(getString(R.string.musica_definida));
                         listDataChild.get(listDataHeader.get(9)).add(musica);
                     }
                 }
@@ -517,8 +514,11 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         final int groupPos = ExpandableListView.getPackedPositionGroup(pos);
         final int childPos = ExpandableListView.getPackedPositionChild(pos);
 
+        String music_name = (String) listAdapter.getChild(groupPos, childPos);
+
         // if child is long-clicked
-        if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+        if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD &&
+                !music_name.equalsIgnoreCase(getString(R.string.musica_definida))) {
             AlertDialog dialog = new AlertDialog.Builder(this).create();
             dialog.setTitle(getString(R.string.apagar_musica_titulo));
             dialog.setMessage(getString(R.string.apagar_musica_texto));
@@ -539,6 +539,9 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
                     listDataChild.get(listDataHeader.get(groupPos)).remove(listAdapter.getChild(groupPos, childPos));
 
                     musicaHandler.close();
+
+                    if(listDataChild.get(listDataHeader.get(groupPos)).size()==0)
+                        listDataChild.get(listDataHeader.get(groupPos)).add(getString(R.string.musica_definida));
 
                 }
             });
