@@ -6,7 +6,8 @@
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
     <string name="apagar_musica_titulo">Apagar música</string>
-    <string name="nova_musica">Nova musica</string>
+    <string name="nova_musica">Nova música</string>
+    <string name="editar_musica">Editar música</string>
     <string name="apagar_musica_texto">De certeza que queres apagar esta música?</string>
     <string name="musica_definida">Não tem nenhuma música definida para esta parte</string>
     <string name="campos_obrigatorios">ERRO!!! Todos os campos são obrigatórios.</string>
@@ -14,6 +15,7 @@
     <string name="gerar_programa_especial">Gerar Programa Especial</string>
     <string name="entrada">Entrada</string>
     <string name="aleluia">Aleluia</string>
+    <string name="salmo">Salmo</string>
     <string name="acto_penitencial">Acto Penitencial</string>
     <string name="ofertorio">Ofertório</string>
     <string name="santo">Santo</string>
@@ -23,17 +25,26 @@
     <string name="accao_gracas">Acção de Graças</string>
     <string name="final_">Final</string>
     <string name="numero">Número:</string>
+    <string name="nome">Nome:</string>
     <string name="ok">OK</string>
     <string name="cancelar">Cancelar</string>
+    <string name="operation_title">Aviso</string>
+    <string name="operation_message">Operação realizada com sucesso.</string>
     <string name="help_title">Ajuda</string>
     <string name="help_message">Para apagar uma música, clique durante algum tempo na música que deseja apagar.</string>
 
-
-
-    <string-array name="planets_array">
+    <string-array name="parts_array">
         <item>Acto Penitencial</item>
+        <item>Salmo</item>
         <item>Pai-nosso</item>
         <item>Acção de Graças</item>
     </string-array>
+    <string name="title_activity_nova_musica">Nova Musica</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Definições</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_settings_fragment">SettingsFragment</string>
 
 </resources>

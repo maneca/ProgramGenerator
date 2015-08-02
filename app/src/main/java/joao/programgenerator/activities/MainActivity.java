@@ -3,8 +3,10 @@ package joao.programgenerator.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,7 +16,7 @@ import joao.programgenerator.R;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
-
+    public static final String PREFS_NAME = "MyPrefsFile";
     private Button gerar, gerar_especial, listar;
 
     @Override
@@ -45,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                                         // Set the dialog title
                                         builder.setTitle("Partes especiais")
-                                               .setMultiChoiceItems(R.array.planets_array, null,
+                                               .setMultiChoiceItems(R.array.parts_array, null,
                                                        new DialogInterface.OnMultiChoiceClickListener() {
                                                            @Override
                                                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -89,6 +91,29 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 startActivity(listagem);
 
                                 break;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case R.id.action_settings: Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+
+            default:	return super.onOptionsItemSelected(item);
+
         }
     }
 

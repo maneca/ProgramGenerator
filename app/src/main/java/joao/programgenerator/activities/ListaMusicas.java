@@ -3,9 +3,11 @@ package joao.programgenerator.activities;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +30,7 @@ import joao.programgenerator.database.PartesMusicaHandler;
 
 
 
-public class ListaMusicas extends ActionBarActivity implements AdapterView.OnItemLongClickListener{
+public class ListaMusicas extends ActionBarActivity implements AdapterView.OnItemLongClickListener, ExpandableListView.OnChildClickListener {
 
     private ExpandableListAdapter listAdapter;
     private ExpandableListView listview;
@@ -53,6 +55,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         listview.setAdapter(listAdapter);
 
         listview.setOnItemLongClickListener(this);
+        listview.setOnChildClickListener(this);
 
 
     }
@@ -94,7 +97,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                entrada.add(""+cursor.getInt(0));
+                entrada.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
@@ -110,15 +113,31 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                acto_penitencial.add(""+cursor.getInt(0));
+                acto_penitencial.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
 
         // ALELUIA
-        List<String> aleluia= new ArrayList<String>();
+        List<String> salmo = new ArrayList<String>();
 
         cursor = musica_handler.getMusicasForParte(3);
+        if(cursor.getCount() == 0)
+            salmo.add(getString(R.string.musica_definida));
+        else{
+            cursor.moveToFirst();
+
+            while(!cursor.isAfterLast()){
+
+                salmo.add(cursor.getInt(0)+"-"+cursor.getString(1));
+                cursor.moveToNext();
+            }
+        }
+
+        // ALELUIA
+        List<String> aleluia = new ArrayList<String>();
+
+        cursor = musica_handler.getMusicasForParte(4);
         if(cursor.getCount() == 0)
             aleluia.add(getString(R.string.musica_definida));
         else{
@@ -126,7 +145,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                aleluia.add("" + cursor.getInt(0));
+                aleluia.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
@@ -134,7 +153,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         // OFERTORIO
         List<String> ofertorio= new ArrayList<String>();
 
-        cursor = musica_handler.getMusicasForParte(4);
+        cursor = musica_handler.getMusicasForParte(5);
         if(cursor.getCount() == 0)
             ofertorio.add(getString(R.string.musica_definida));
         else{
@@ -142,7 +161,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                ofertorio.add(""+cursor.getInt(0));
+                ofertorio.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
@@ -150,7 +169,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         // SANTO
         List<String> santo = new ArrayList<String>();
 
-        cursor = musica_handler.getMusicasForParte(5);
+        cursor = musica_handler.getMusicasForParte(6);
         if(cursor.getCount() == 0)
             santo.add(getString(R.string.musica_definida));
         else{
@@ -158,7 +177,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                santo.add(""+cursor.getInt(0));
+                santo.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
@@ -166,7 +185,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         // PAI NOSSO
         List<String> pai_nosso= new ArrayList<String>();
 
-        cursor = musica_handler.getMusicasForParte(6);
+        cursor = musica_handler.getMusicasForParte(7);
         if(cursor.getCount() == 0)
             pai_nosso.add(getString(R.string.musica_definida));
         else{
@@ -174,15 +193,15 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                pai_nosso.add("" + cursor.getInt(0));
+                pai_nosso.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
 
         // PAZ
-        List<String> paz= new ArrayList<String>();
+        List<String> paz= new ArrayList<>();
 
-        cursor = musica_handler.getMusicasForParte(7);
+        cursor = musica_handler.getMusicasForParte(8);
         if(cursor.getCount() == 0)
             paz.add(getString(R.string.musica_definida));
         else{
@@ -190,7 +209,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                paz.add("" + cursor.getInt(0));
+                paz.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
@@ -198,7 +217,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         // COMUNHÃO
         List<String> comunhao= new ArrayList<String>();
 
-        cursor = musica_handler.getMusicasForParte(8);
+        cursor = musica_handler.getMusicasForParte(9);
         if(cursor.getCount() == 0)
             comunhao.add(getString(R.string.musica_definida));
         else{
@@ -206,7 +225,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                comunhao.add(""+cursor.getInt(0));
+                comunhao.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
@@ -214,7 +233,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         // ACÇÃO DE GRAÇAS
         List<String> accao_gracas= new ArrayList<String>();
 
-        cursor = musica_handler.getMusicasForParte(9);
+        cursor = musica_handler.getMusicasForParte(10);
         if(cursor.getCount() == 0)
             accao_gracas.add(getString(R.string.musica_definida));
         else{
@@ -222,7 +241,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                accao_gracas.add(""+cursor.getInt(0));
+                accao_gracas.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
@@ -230,7 +249,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         // FINAL
         List<String> final_= new ArrayList<String>();
 
-        cursor = musica_handler.getMusicasForParte(10);
+        cursor = musica_handler.getMusicasForParte(11);
         if(cursor.getCount() == 0)
             final_.add(getString(R.string.musica_definida));
         else{
@@ -238,7 +257,7 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
             while(!cursor.isAfterLast()){
 
-                final_.add("" + cursor.getInt(0));
+                final_.add(cursor.getInt(0)+"-"+cursor.getString(1));
                 cursor.moveToNext();
             }
         }
@@ -248,14 +267,15 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
         listDataChild.put(listDataHeader.get(0), entrada); // Header, Child data
         listDataChild.put(listDataHeader.get(1), acto_penitencial);
-        listDataChild.put(listDataHeader.get(2), aleluia);
-        listDataChild.put(listDataHeader.get(3), ofertorio);
-        listDataChild.put(listDataHeader.get(4), santo);
-        listDataChild.put(listDataHeader.get(5), pai_nosso);
-        listDataChild.put(listDataHeader.get(6), paz);
-        listDataChild.put(listDataHeader.get(7), comunhao);
-        listDataChild.put(listDataHeader.get(8), accao_gracas);
-        listDataChild.put(listDataHeader.get(9), final_);
+        listDataChild.put(listDataHeader.get(2), salmo);
+        listDataChild.put(listDataHeader.get(3), aleluia);
+        listDataChild.put(listDataHeader.get(4), ofertorio);
+        listDataChild.put(listDataHeader.get(5), santo);
+        listDataChild.put(listDataHeader.get(6), pai_nosso);
+        listDataChild.put(listDataHeader.get(7), paz);
+        listDataChild.put(listDataHeader.get(8), comunhao);
+        listDataChild.put(listDataHeader.get(9), accao_gracas);
+        listDataChild.put(listDataHeader.get(10), final_);
     }
 
 
@@ -272,11 +292,13 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.action_addmusic:  for(int i=0; i<10; i++){
-                                            listview.collapseGroup(i);
-                                        }
+            case R.id.action_addmusic:  Intent intent = new Intent(ListaMusicas.this, NovaMusicaActivity.class);
+                                        intent.putExtra("music_number", -1);
 
-                                        return customAlertDialog();
+                                        startActivity(intent);
+                                        finish();
+
+                                        return true;
 
             case R.id.action_help:      return helpDialog();
 
@@ -306,203 +328,6 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
     }
 
-    private boolean customAlertDialog(){
-
-
-        //DIALOGO
-
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.custom_alert_dialog);
-
-        final EditText numero;
-        final CheckedTextView entrada , aleluia, acto_penitencial, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
-
-        dialog.setTitle(R.string.nova_musica);
-
-        dialog.show();
-
-        // NUMERO DA MUSICA
-        numero = (EditText) dialog.findViewById(R.id.numero_musica);
-
-        // CHECKBOXES
-        entrada = (CheckedTextView) dialog.findViewById(R.id.entrada);
-        aleluia = (CheckedTextView) dialog.findViewById(R.id.aleluia);
-        acto_penitencial = (CheckedTextView) dialog.findViewById(R.id.acto_penitencial);
-        ofertorio = (CheckedTextView) dialog.findViewById(R.id.ofertorio);
-        santo = (CheckedTextView) dialog.findViewById(R.id.santo);
-        pai_nosso = (CheckedTextView) dialog.findViewById(R.id.pai_nosso);
-        paz = (CheckedTextView) dialog.findViewById(R.id.paz);
-        comunhao = (CheckedTextView) dialog.findViewById(R.id.comunhao);
-        accao_gracas = (CheckedTextView) dialog.findViewById(R.id.accao_gracas);
-        final_ = (CheckedTextView) dialog.findViewById(R.id.final_);
-
-        Button ok = (Button) dialog.findViewById(R.id.ok);
-        Button cancel = (Button) dialog.findViewById(R.id.cancel);
-
-        entrada.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                entrada.toggle();
-            }
-        });
-
-        acto_penitencial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                acto_penitencial.toggle();
-            }
-        });
-
-        aleluia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aleluia.toggle();
-            }
-        });
-
-        ofertorio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ofertorio.toggle();
-            }
-        });
-
-        santo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                santo.toggle();
-            }
-        });
-
-        pai_nosso.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pai_nosso.toggle();
-            }
-        });
-
-        paz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                paz.toggle();
-            }
-        });
-
-        comunhao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                comunhao.toggle();
-            }
-        });
-
-        accao_gracas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                accao_gracas.toggle();
-            }
-        });
-
-        final_.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final_.toggle();
-            }
-        });
-
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                musica_handler = new PartesMusicaHandler(getApplicationContext());
-
-                musica_handler.open();
-
-                String musica = numero.getText().toString();
-
-                if(musica.equals("") ||
-                        (!entrada.isChecked() && !aleluia.isChecked() && !acto_penitencial.isChecked() &&
-                         !ofertorio.isChecked() && !santo.isChecked() && !pai_nosso.isChecked() &&
-                         !paz.isChecked() && !comunhao.isChecked() && !accao_gracas.isChecked() && !final_.isChecked()))
-                    Toast.makeText(getApplicationContext(), getString(R.string.campos_obrigatorios), Toast.LENGTH_LONG).show();
-                else{
-                    int number = Integer.parseInt(musica);
-                    if(entrada.isChecked()) {
-                        musica_handler.insertParteMusica(1, number);
-                        listDataChild.get(listDataHeader.get(0)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(0)).add(musica);
-                    }
-
-                    if(acto_penitencial.isChecked()) {
-                        musica_handler.insertParteMusica(2, number);
-                        listDataChild.get(listDataHeader.get(1)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(1)).add(musica);
-                    }
-
-                    if(aleluia.isChecked()) {
-                        musica_handler.insertParteMusica(3, number);
-                        listDataChild.get(listDataHeader.get(2)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(2)).add(musica);
-                    }
-
-                    if(ofertorio.isChecked()) {
-                        musica_handler.insertParteMusica(4, number);
-                        listDataChild.get(listDataHeader.get(3)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(3)).add(musica);
-                    }
-
-                    if(santo.isChecked()) {
-                        musica_handler.insertParteMusica(5, number);
-                        listDataChild.get(listDataHeader.get(4)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(4)).add(musica);
-                    }
-
-                    if(pai_nosso.isChecked()) {
-                        musica_handler.insertParteMusica(6, number);
-                        listDataChild.get(listDataHeader.get(5)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(5)).add(musica);
-                    }
-
-                    if(paz.isChecked()) {
-                        musica_handler.insertParteMusica(7, number);
-                        listDataChild.get(listDataHeader.get(6)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(6)).add(musica);
-                    }
-
-                    if(comunhao.isChecked()) {
-                        musica_handler.insertParteMusica(8, number);
-                        listDataChild.get(listDataHeader.get(7)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(7)).add(musica);
-                    }
-
-                    if(accao_gracas.isChecked()) {
-                        musica_handler.insertParteMusica(9, number);
-                        listDataChild.get(listDataHeader.get(8)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(8)).add(musica);
-                    }
-
-                    if(final_.isChecked()) {
-                        musica_handler.insertParteMusica(10, number);
-                        listDataChild.get(listDataHeader.get(9)).remove(getString(R.string.musica_definida));
-                        listDataChild.get(listDataHeader.get(9)).add(musica);
-                    }
-                }
-
-                musica_handler.close();
-
-                dialog.dismiss();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        return true;
-    }
-
-
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -527,7 +352,9 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // TODO Auto-generated method stub
-                    int musica = Integer.parseInt((String) listAdapter.getChild(groupPos, childPos));
+                    String[] musica_parte = ((String) listAdapter.getChild(groupPos, childPos)).split("-");
+
+                    int musica = Integer.parseInt(musica_parte[0]);
 
                     PartesMusicaHandler musicaHandler = new PartesMusicaHandler(getApplicationContext());
 
@@ -559,6 +386,48 @@ public class ListaMusicas extends ActionBarActivity implements AdapterView.OnIte
 
 
         }
+        return false;
+    }
+
+    @Override
+    public boolean onChildClick(ExpandableListView parent, View v, int groupPos, int childPos, long id) {
+
+
+            String music = (String) listAdapter.getChild(groupPos, childPos);
+
+            String[] music_number_name = music.split("-");
+
+
+            int number = Integer.parseInt(music_number_name[0]);
+
+            Intent intent = new Intent(ListaMusicas.this, NovaMusicaActivity.class);
+
+            PartesMusicaHandler partesMusicaHandler = new PartesMusicaHandler(this);
+            partesMusicaHandler.open();
+
+            Cursor c = partesMusicaHandler.getPartesForMusica(number);
+            c.moveToFirst();
+
+            ArrayList<Integer> partes = new ArrayList<Integer>();
+
+            while(!c.isAfterLast()){
+
+                partes.add(c.getInt(0));
+                c.moveToNext();
+            }
+
+            partesMusicaHandler.close();
+
+            intent.putExtra("music_number", number);
+            if(music_number_name[1].equalsIgnoreCase("null"))
+                intent.putExtra("music_name", "");
+            else intent.putExtra("music_name", music_number_name[1]);
+            intent.putExtra("music_parts", partes);
+
+        startActivity(intent);
+            finish();
+
+
         return false;
     }
 }

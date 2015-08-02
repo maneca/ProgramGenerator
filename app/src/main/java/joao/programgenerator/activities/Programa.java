@@ -1,38 +1,45 @@
 package joao.programgenerator.activities;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
 import joao.programgenerator.R;
+import joao.programgenerator.custom.Musica;
 import joao.programgenerator.database.PartesMusicaHandler;
 
 
 public class Programa extends ActionBarActivity {
-
-    private TextView entrada, aleluia, acto_penitencial, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
-    private TextView acto_penitencial_label, pai_nosso_label, accao_gracas_label;
-    private TableRow row1, row2, row3;
+    public static final String PREFS_NAME = "MyPrefsFile";
+    private TextView entrada, aleluia, acto_penitencial, salmo, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
+    private TextView acto_penitencial_label, pai_nosso_label, accao_gracas_label, salmo_label;
+    private TableRow row1, row2, row3, row4;
+    private String nome_numero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_programa);
 
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+        nome_numero = sharedPreferences.getString("nome_numero", "Numero");
+
+
         entrada = (TextView) findViewById(R.id.entrada);
         aleluia = (TextView) findViewById(R.id.aleluia);
         acto_penitencial = (TextView) findViewById(R.id.acto_penitencial);
         acto_penitencial_label = (TextView) findViewById(R.id.acto_penitencial_label);
+        salmo = (TextView) findViewById(R.id.salmo);
+        salmo_label = (TextView) findViewById(R.id.salmo_label);
         ofertorio = (TextView) findViewById(R.id.ofertorio);
         santo = (TextView) findViewById(R.id.santo);
         pai_nosso = (TextView) findViewById(R.id.pai_nosso);
@@ -46,6 +53,8 @@ public class Programa extends ActionBarActivity {
         row1 = (TableRow) findViewById(R.id.row_acto);
         row2 = (TableRow) findViewById(R.id.row_pai_nosso);
         row3 = (TableRow) findViewById(R.id.row_accao_gracas);
+        row4 = (TableRow) findViewById(R.id.row_salmo);
+
 
         row1.setVisibility(View.GONE);
         acto_penitencial.setVisibility(View.GONE);
@@ -56,12 +65,14 @@ public class Programa extends ActionBarActivity {
         row3.setVisibility(View.GONE);
         accao_gracas.setVisibility(View.GONE);
         accao_gracas_label.setVisibility(View.GONE);
+        row4.setVisibility(View.GONE);
+        salmo.setVisibility(View.GONE);
+        salmo_label.setVisibility(View.GONE);
 
         Bundle bundle = getIntent().getExtras();
 
         if(bundle != null){
             ArrayList seleccionados = bundle.getCharSequenceArrayList("escolhidas");
-
 
             if(seleccionados.contains(0)) {
                 row1.setVisibility(View.VISIBLE);
@@ -69,13 +80,20 @@ public class Programa extends ActionBarActivity {
                 acto_penitencial.setVisibility(View.VISIBLE);
             }
 
-            if(seleccionados.contains(1)){
+            if(seleccionados.contains(1)) {
+                row4.setVisibility(View.VISIBLE);
+                salmo_label.setVisibility(View.VISIBLE);
+                salmo.setVisibility(View.VISIBLE);
+            }
+
+
+            if(seleccionados.contains(2)){
                 row2.setVisibility(View.VISIBLE);
                 pai_nosso_label.setVisibility(View.VISIBLE);
                 pai_nosso.setVisibility(View.VISIBLE);
             }
 
-            if(seleccionados.contains(2)) {
+            if(seleccionados.contains(3)) {
                 row3.setVisibility(View.VISIBLE);
                 accao_gracas_label.setVisibility(View.VISIBLE);
                 accao_gracas.setVisibility(View.VISIBLE);
@@ -109,94 +127,136 @@ public class Programa extends ActionBarActivity {
     }
 
     private void generatePrograma(){
-        ArrayList<Integer> programa = new ArrayList<Integer>();
+        ArrayList<Musica> programa = new ArrayList<Musica>();
 
         // Geração dos números random
-        int prog_entrada = returnMusicNumber(1);
+        Musica prog_entrada = returnMusic(1);
         programa.add(prog_entrada);
 
-        int prog_aleluia = solveDuplicate(returnMusicNumber(3), programa, 3);
+        Musica prog_aleluia = solveDuplicate(returnMusic(4), programa, 4);
         programa.add(prog_aleluia);
 
-        int prog_ofertorio = solveDuplicate(returnMusicNumber(4), programa, 4);
+        Musica prog_ofertorio = solveDuplicate(returnMusic(5), programa, 5);
         programa.add(prog_ofertorio);
 
-        int prog_santo = solveDuplicate(returnMusicNumber(5), programa, 5);
+        Musica prog_santo = solveDuplicate(returnMusic(6), programa, 6);
         programa.add(prog_santo);
 
-        int prog_paz = solveDuplicate(returnMusicNumber(7), programa, 7);
+        Musica prog_paz = solveDuplicate(returnMusic(8), programa, 8);
         programa.add(prog_paz);
 
-        int prog_comunhao = solveDuplicate(returnMusicNumber(8), programa, 8);
+        Musica prog_comunhao = solveDuplicate(returnMusic(9), programa, 9);
         programa.add(prog_comunhao);
 
-        int prog_final = solveDuplicate(returnMusicNumber(10), programa, 10);
+        Musica prog_final = solveDuplicate(returnMusic(11), programa, 11);
         programa.add(prog_final);
 
-        if(prog_entrada == -1)
+        if(prog_entrada == null)
             entrada.setText("ND");
-        else entrada.setText(""+prog_entrada);
+        else if(nome_numero.equalsIgnoreCase("Nome")) {
+            entrada.setText(prog_entrada.getNome());
+            entrada.setTextSize(14);
+        }else entrada.setText(""+prog_entrada.getNumero());
 
-        if(prog_aleluia == -1)
+        if(prog_aleluia == null)
             aleluia.setText("ND");
-        else aleluia.setText(""+prog_aleluia);
+        else if(nome_numero.equalsIgnoreCase("Nome")) {
+            aleluia.setText(prog_aleluia.getNome());
+            aleluia.setTextSize(14);
+        }else aleluia.setText(""+prog_aleluia.getNumero());
 
         if(acto_penitencial.getVisibility() == View.VISIBLE){
-            int prog_acto = solveDuplicate(returnMusicNumber(2), programa, 2);
+            Musica prog_acto = solveDuplicate(returnMusic(2), programa, 2);
             programa.add(prog_acto);
 
-            if( prog_acto == -1)
+            if( prog_acto == null)
                 acto_penitencial.setText("ND");
-            else acto_penitencial.setText(""+prog_acto);
+            else if(nome_numero.equalsIgnoreCase("Nome")) {
+                acto_penitencial.setText(prog_acto.getNome());
+                acto_penitencial.setTextSize(14);
+            }else acto_penitencial.setText(""+prog_acto.getNumero());
         }
 
-        if(prog_ofertorio == -1)
-            ofertorio.setText("ND");
-        else ofertorio.setText(""+prog_ofertorio);
+        if(salmo.getVisibility() == View.VISIBLE){
+            Musica prog_salmo = solveDuplicate(returnMusic(3), programa, 3);
+            programa.add(prog_salmo);
 
-        if(prog_santo == -1)
+            if( prog_salmo == null)
+                salmo.setText("ND");
+            else if(nome_numero.equalsIgnoreCase("Nome")) {
+                salmo.setText(prog_salmo.getNome());
+                salmo.setTextSize(14);
+            }else salmo.setText(""+prog_salmo.getNumero());
+        }
+
+        if(prog_ofertorio == null)
+            ofertorio.setText("ND");
+        else if(nome_numero.equalsIgnoreCase("Nome")) {
+            ofertorio.setText(prog_ofertorio.getNome());
+            ofertorio.setTextSize(14);
+        }else ofertorio.setText(""+prog_ofertorio.getNumero());
+
+        if(prog_santo == null)
             santo.setText("ND");
-        else santo.setText(""+prog_santo);
+        else if(nome_numero.equalsIgnoreCase("Nome")) {
+            santo.setText(prog_santo.getNome());
+            santo.setTextSize(14);
+        }else santo.setText(""+prog_santo.getNumero());
 
         if(pai_nosso.getVisibility() == View.VISIBLE){
-            int prog_pai_nosso = solveDuplicate(returnMusicNumber(6), programa, 6);
+            Musica prog_pai_nosso = solveDuplicate(returnMusic(7), programa, 7);
             programa.add(prog_pai_nosso);
 
-            if(prog_pai_nosso == -1)
+            if(prog_pai_nosso == null)
                 pai_nosso.setText("ND");
-            else pai_nosso.setText(""+prog_pai_nosso);
+            else if(nome_numero.equalsIgnoreCase("Nome")) {
+                pai_nosso.setText(prog_pai_nosso.getNome());
+                pai_nosso.setTextSize(14);
+            }else pai_nosso.setText(""+prog_pai_nosso.getNumero());
         }
 
-        if(prog_paz == -1)
+        if(prog_paz == null)
             paz.setText("ND");
-        else paz.setText(""+prog_paz);
+        else if(nome_numero.equalsIgnoreCase("Nome")) {
+            paz.setText(prog_paz.getNome());
+            paz.setTextSize(14);
+        }else paz.setText(""+prog_paz.getNumero());
 
-        if(prog_comunhao == -1)
+        if(prog_comunhao == null)
             comunhao.setText("ND");
-        else comunhao.setText(""+prog_comunhao);
+        else if(nome_numero.equalsIgnoreCase("Nome")) {
+            comunhao.setText(prog_comunhao.getNome());
+            comunhao.setTextSize(14);
+        }else comunhao.setText(""+prog_comunhao.getNumero());
 
         if(accao_gracas.getVisibility() == View.VISIBLE){
-            int prog_accao_gracas = solveDuplicate(returnMusicNumber(9), programa, 9);
+            Musica prog_accao_gracas = solveDuplicate(returnMusic(10), programa, 10);
             programa.add(prog_accao_gracas);
 
-            if(prog_accao_gracas == -1)
+            if(prog_accao_gracas == null)
                 accao_gracas.setText("ND");
-            else accao_gracas.setText(""+prog_accao_gracas);
+            else if(nome_numero.equalsIgnoreCase("Nome")) {
+                accao_gracas.setText(prog_accao_gracas.getNome());
+                accao_gracas.setTextSize(14);
+            }else accao_gracas.setText(""+prog_accao_gracas.getNumero());
         }
 
-        if(prog_final == -1)
+        if(prog_final == null)
             final_.setText("ND");
-        else final_.setText(""+prog_final);
+        else if(nome_numero.equalsIgnoreCase("Nome")) {
+            final_.setText(prog_final.getNome());
+            final_.setTextSize(14);
+        }else final_.setText(""+prog_final.getNumero());
     }
 
-    private int solveDuplicate(int number, ArrayList<Integer> programa, int pos){
-        int new_number = -1;
+    private Musica solveDuplicate(Musica musica, ArrayList<Musica> programa, int pos) {
+        Musica new_musica = null;
 
-        if(programa.indexOf(number) != -1 ){
-            new_number = returnMusicNumber(pos);
-        }else new_number = number;
+        if(programa.indexOf(musica) != -1 ){
+            new_musica = returnMusic(pos);
+        }else new_musica = musica;
 
-        return new_number;
+        return new_musica;
     }
 
     private int generateRandomNumber(int minimum, int maximum){
@@ -211,7 +271,7 @@ public class Programa extends ActionBarActivity {
 
     }
 
-    private int returnMusicNumber(int parte){
+    private Musica returnMusic(int parte){
 
         PartesMusicaHandler musica_handler = new PartesMusicaHandler(this);
 
@@ -220,17 +280,18 @@ public class Programa extends ActionBarActivity {
         Cursor c = musica_handler.getMusicasForParte(parte);
         c.moveToFirst();
 
-        ArrayList<Integer> lista_musicas = new ArrayList<Integer>();
+        ArrayList<Musica> lista_musicas = new ArrayList<Musica>();
 
         while(!c.isAfterLast()){
 
-            lista_musicas.add(c.getInt(0));
+            Musica musica = new Musica(c.getInt(0), c.getString(1));
+            lista_musicas.add(musica);
             c.moveToNext();
         }
 
         musica_handler.close();
 
-        int result = -1;
+        Musica result = null;
 
         if(lista_musicas.size()>0){
             int position = generateRandomNumber(0, lista_musicas.size()-1);

@@ -32,6 +32,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.NovaMusicaActivity"
+            android:label="@string/title_activity_nova_musica"
+            android:parentActivityName=".activities.ListaMusicas" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="joao.programgenerator.activities.ListaMusicas" />
+        </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="joao.programgenerator.activities.MainActivity" />
+        </activity>
 
     </application>
 
