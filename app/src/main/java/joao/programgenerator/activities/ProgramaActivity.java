@@ -3,7 +3,7 @@ package joao.programgenerator.activities;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import joao.programgenerator.R;
-import joao.programgenerator.custom.Musica;
 import joao.programgenerator.database.PartesMusicaHandler;
+import joao.programgenerator.pojos.Musica;
 
 
-public class Programa extends ActionBarActivity {
+public class ProgramaActivity extends AppCompatActivity {
     public static final String PREFS_NAME = "MyPrefsFile";
     private TextView entrada, aleluia, acto_penitencial, salmo, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
     private TextView acto_penitencial_label, pai_nosso_label, accao_gracas_label, salmo_label;
@@ -34,26 +34,26 @@ public class Programa extends ActionBarActivity {
         nome_numero = sharedPreferences.getString("nome_numero", "Numero");
 
 
-        entrada = (TextView) findViewById(R.id.entrada);
-        aleluia = (TextView) findViewById(R.id.aleluia);
-        acto_penitencial = (TextView) findViewById(R.id.acto_penitencial);
-        acto_penitencial_label = (TextView) findViewById(R.id.acto_penitencial_label);
-        salmo = (TextView) findViewById(R.id.salmo);
-        salmo_label = (TextView) findViewById(R.id.salmo_label);
-        ofertorio = (TextView) findViewById(R.id.ofertorio);
-        santo = (TextView) findViewById(R.id.santo);
-        pai_nosso = (TextView) findViewById(R.id.pai_nosso);
-        pai_nosso_label = (TextView) findViewById(R.id.pai_nosso_label);
-        paz = (TextView) findViewById(R.id.paz);
-        comunhao = (TextView) findViewById(R.id.comunhao);
-        accao_gracas = (TextView) findViewById(R.id.accao_gracas);
-        accao_gracas_label = (TextView) findViewById(R.id.accao_gracas_label);
-        final_ = (TextView) findViewById(R.id.last);
+        entrada = findViewById(R.id.entrada);
+        aleluia = findViewById(R.id.aleluia);
+        acto_penitencial = findViewById(R.id.acto_penitencial);
+        acto_penitencial_label = findViewById(R.id.acto_penitencial_label);
+        salmo = findViewById(R.id.salmo);
+        salmo_label = findViewById(R.id.salmo_label);
+        ofertorio = findViewById(R.id.ofertorio);
+        santo = findViewById(R.id.santo);
+        pai_nosso = findViewById(R.id.pai_nosso);
+        pai_nosso_label = findViewById(R.id.pai_nosso_label);
+        paz = findViewById(R.id.paz);
+        comunhao = findViewById(R.id.comunhao);
+        accao_gracas = findViewById(R.id.accao_gracas);
+        accao_gracas_label = findViewById(R.id.accao_gracas_label);
+        final_ = findViewById(R.id.last);
 
-        row1 = (TableRow) findViewById(R.id.row_acto);
-        row2 = (TableRow) findViewById(R.id.row_pai_nosso);
-        row3 = (TableRow) findViewById(R.id.row_accao_gracas);
-        row4 = (TableRow) findViewById(R.id.row_salmo);
+        row1 = findViewById(R.id.row_acto);
+        row2 = findViewById(R.id.row_pai_nosso);
+        row3 = findViewById(R.id.row_accao_gracas);
+        row4 = findViewById(R.id.row_salmo);
 
 
         row1.setVisibility(View.GONE);
@@ -154,16 +154,16 @@ public class Programa extends ActionBarActivity {
         if(prog_entrada == null)
             entrada.setText("ND");
         else if(nome_numero.equalsIgnoreCase("Nome")) {
-            entrada.setText(prog_entrada.getNome());
+            entrada.setText(prog_entrada.getMusic_name());
             entrada.setTextSize(14);
-        }else entrada.setText(""+prog_entrada.getNumero());
+        }else entrada.setText(""+prog_entrada.getMusic_number());
 
         if(prog_aleluia == null)
             aleluia.setText("ND");
         else if(nome_numero.equalsIgnoreCase("Nome")) {
-            aleluia.setText(prog_aleluia.getNome());
+            aleluia.setText(prog_aleluia.getMusic_name());
             aleluia.setTextSize(14);
-        }else aleluia.setText(""+prog_aleluia.getNumero());
+        }else aleluia.setText(""+prog_aleluia.getMusic_number());
 
         if(acto_penitencial.getVisibility() == View.VISIBLE){
             Musica prog_acto = solveDuplicate(returnMusic(2), programa, 2);
@@ -172,9 +172,9 @@ public class Programa extends ActionBarActivity {
             if( prog_acto == null)
                 acto_penitencial.setText("ND");
             else if(nome_numero.equalsIgnoreCase("Nome")) {
-                acto_penitencial.setText(prog_acto.getNome());
+                acto_penitencial.setText(prog_acto.getMusic_name());
                 acto_penitencial.setTextSize(14);
-            }else acto_penitencial.setText(""+prog_acto.getNumero());
+            }else acto_penitencial.setText(""+prog_acto.getMusic_number());
         }
 
         if(salmo.getVisibility() == View.VISIBLE){
@@ -184,24 +184,24 @@ public class Programa extends ActionBarActivity {
             if( prog_salmo == null)
                 salmo.setText("ND");
             else if(nome_numero.equalsIgnoreCase("Nome")) {
-                salmo.setText(prog_salmo.getNome());
+                salmo.setText(prog_salmo.getMusic_name());
                 salmo.setTextSize(14);
-            }else salmo.setText(""+prog_salmo.getNumero());
+            }else salmo.setText(""+prog_salmo.getMusic_number());
         }
 
         if(prog_ofertorio == null)
             ofertorio.setText("ND");
         else if(nome_numero.equalsIgnoreCase("Nome")) {
-            ofertorio.setText(prog_ofertorio.getNome());
+            ofertorio.setText(prog_ofertorio.getMusic_name());
             ofertorio.setTextSize(14);
-        }else ofertorio.setText(""+prog_ofertorio.getNumero());
+        }else ofertorio.setText(""+prog_ofertorio.getMusic_number());
 
         if(prog_santo == null)
             santo.setText("ND");
         else if(nome_numero.equalsIgnoreCase("Nome")) {
-            santo.setText(prog_santo.getNome());
+            santo.setText(prog_santo.getMusic_name());
             santo.setTextSize(14);
-        }else santo.setText(""+prog_santo.getNumero());
+        }else santo.setText(""+prog_santo.getMusic_number());
 
         if(pai_nosso.getVisibility() == View.VISIBLE){
             Musica prog_pai_nosso = solveDuplicate(returnMusic(7), programa, 7);
@@ -210,24 +210,24 @@ public class Programa extends ActionBarActivity {
             if(prog_pai_nosso == null)
                 pai_nosso.setText("ND");
             else if(nome_numero.equalsIgnoreCase("Nome")) {
-                pai_nosso.setText(prog_pai_nosso.getNome());
+                pai_nosso.setText(prog_pai_nosso.getMusic_name());
                 pai_nosso.setTextSize(14);
-            }else pai_nosso.setText(""+prog_pai_nosso.getNumero());
+            }else pai_nosso.setText(""+prog_pai_nosso.getMusic_number());
         }
 
         if(prog_paz == null)
             paz.setText("ND");
         else if(nome_numero.equalsIgnoreCase("Nome")) {
-            paz.setText(prog_paz.getNome());
+            paz.setText(prog_paz.getMusic_name());
             paz.setTextSize(14);
-        }else paz.setText(""+prog_paz.getNumero());
+        }else paz.setText(""+prog_paz.getMusic_number());
 
         if(prog_comunhao == null)
             comunhao.setText("ND");
         else if(nome_numero.equalsIgnoreCase("Nome")) {
-            comunhao.setText(prog_comunhao.getNome());
+            comunhao.setText(prog_comunhao.getMusic_name());
             comunhao.setTextSize(14);
-        }else comunhao.setText(""+prog_comunhao.getNumero());
+        }else comunhao.setText(""+prog_comunhao.getMusic_number());
 
         if(accao_gracas.getVisibility() == View.VISIBLE){
             Musica prog_accao_gracas = solveDuplicate(returnMusic(10), programa, 10);
@@ -236,17 +236,17 @@ public class Programa extends ActionBarActivity {
             if(prog_accao_gracas == null)
                 accao_gracas.setText("ND");
             else if(nome_numero.equalsIgnoreCase("Nome")) {
-                accao_gracas.setText(prog_accao_gracas.getNome());
+                accao_gracas.setText(prog_accao_gracas.getMusic_name());
                 accao_gracas.setTextSize(14);
-            }else accao_gracas.setText(""+prog_accao_gracas.getNumero());
+            }else accao_gracas.setText(""+prog_accao_gracas.getMusic_number());
         }
 
         if(prog_final == null)
             final_.setText("ND");
         else if(nome_numero.equalsIgnoreCase("Nome")) {
-            final_.setText(prog_final.getNome());
+            final_.setText(prog_final.getMusic_name());
             final_.setTextSize(14);
-        }else final_.setText(""+prog_final.getNumero());
+        }else final_.setText(""+prog_final.getMusic_number());
     }
 
     private Musica solveDuplicate(Musica musica, ArrayList<Musica> programa, int pos) {

@@ -1,10 +1,10 @@
 package joao.programgenerator.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import joao.programgenerator.R;
 
-public class SettingsActivity extends ActionBarActivity implements AdapterView.OnItemClickListener{
+public class SettingsActivity extends Activity implements AdapterView.OnItemClickListener{
     public static final String PREFS_NAME = "MyPrefsFile";
     private ListView settings;
 
@@ -59,7 +59,7 @@ public class SettingsActivity extends ActionBarActivity implements AdapterView.O
                         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("nome_numero", options[which]);
-                        editor.commit();
+                        editor.apply();
 
                     }
                 }).setPositiveButton("OK", new DialogInterface.OnClickListener() {

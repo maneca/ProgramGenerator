@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import joao.programgenerator.R;
 import joao.programgenerator.database.PartesMusicaHandler;
 
-public class NovaMusicaActivity extends ActionBarActivity implements View.OnClickListener {
+public class NovaMusicaActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText numero, nome;
     private CheckedTextView entrada , salmo, aleluia, acto_penitencial, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
@@ -254,7 +254,7 @@ public class NovaMusicaActivity extends ActionBarActivity implements View.OnClic
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Intent intent = new Intent(NovaMusicaActivity.this, ListaMusicas.class);
+                        Intent intent = new Intent(NovaMusicaActivity.this, ListaMusicasActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -264,7 +264,7 @@ public class NovaMusicaActivity extends ActionBarActivity implements View.OnClic
 
                 break;
 
-            case R.id.cancel:   Intent intent = new Intent(NovaMusicaActivity.this, ListaMusicas.class);
+            case R.id.cancel:   Intent intent = new Intent(NovaMusicaActivity.this, ListaMusicasActivity.class);
                 startActivity(intent);
                 finish();
 

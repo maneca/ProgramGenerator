@@ -3,6 +3,7 @@
     package="joao.programgenerator" >
 
     <application
+        android:name=".ProgramGeneratorApp"
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
@@ -17,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.Programa"
+            android:name=".activities.ProgramaActivity"
             android:label="@string/title_activity_programa"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
@@ -25,7 +26,7 @@
                 android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.ListaMusicas"
+            android:name=".activities.ListaMusicasActivity"
             android:label="@string/title_activity_lista_musicas"
             android:parentActivityName=".activities.MainActivity" >
             <meta-data
@@ -35,10 +36,10 @@
         <activity
             android:name=".activities.NovaMusicaActivity"
             android:label="@string/title_activity_nova_musica"
-            android:parentActivityName=".activities.ListaMusicas" >
+            android:parentActivityName=".activities.ListaMusicasActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="joao.programgenerator.activities.ListaMusicas" />
+                android:value="joao.programgenerator.activities.ListaMusicasActivity" />
         </activity>
         <activity
             android:name=".activities.SettingsActivity"

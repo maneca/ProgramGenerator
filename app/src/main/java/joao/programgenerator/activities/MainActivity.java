@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,18 +15,16 @@ import java.util.ArrayList;
 import joao.programgenerator.R;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener{
-    public static final String PREFS_NAME = "MyPrefsFile";
-    private Button gerar, gerar_especial, listar;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gerar = (Button) findViewById(R.id.gerar);
-        gerar_especial = (Button) findViewById(R.id.gerar_especial);
-        listar = (Button) findViewById(R.id.listar);
+        Button gerar = findViewById(R.id.gerar);
+        Button gerar_especial = findViewById(R.id.gerar_especial);
+        Button listar = findViewById(R.id.listar);
 
         gerar.setOnClickListener(this);
         gerar_especial.setOnClickListener(this);
@@ -38,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onClick(View v) {
 
         switch(v.getId()){
-            case R.id.gerar:    Intent intent = new Intent(MainActivity.this, Programa.class);
+            case R.id.gerar:    Intent intent = new Intent(MainActivity.this, ProgramaActivity.class);
                                 startActivity(intent);
 
                                 break;
@@ -62,7 +60,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                             @Override
                                             public void onClick(DialogInterface dialog, int id) {
 
-                                                Intent intent = new Intent(MainActivity.this, Programa.class);
+                                                Intent intent = new Intent(MainActivity.this, ProgramaActivity.class);
 
                                                 Bundle bundle = new Bundle();
 
@@ -86,7 +84,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                                         break;
 
-            case R.id.listar:   Intent listagem = new Intent(MainActivity.this, ListaMusicas.class);
+            case R.id.listar:   Intent listagem = new Intent(MainActivity.this, ListaMusicasActivity.class);
 
                                 startActivity(listagem);
 
@@ -103,9 +101,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_settings: Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
