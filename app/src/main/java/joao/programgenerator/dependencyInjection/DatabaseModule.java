@@ -9,6 +9,9 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.ContentValues;
 import android.support.annotation.NonNull;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -41,7 +44,7 @@ public class DatabaseModule {
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
                         contentValues.put("name", "Ofertório");
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
-                        contentValues.put("name", "Salmo");
+                        contentValues.put("name", "Santo");
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
                         contentValues.put("name", "Pai-nosso");
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
@@ -72,6 +75,14 @@ public class DatabaseModule {
     PartesEucaristiaDao providePartesEucaristiaDao(AppDatabase db) {
         return db.partesEucaristiaDao();
     }
+
+    @Provides
+    @Singleton
+    Executor provideExecutor(){
+
+        return Executors.newSingleThreadExecutor();
+    }
+
 
 
 }

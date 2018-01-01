@@ -61,4 +61,8 @@ dependencies {
     compile 'com.google.dagger:dagger-android:2.11'
     compile 'com.google.dagger:dagger-android-support:2.11' // if you use the support libraries
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+
+    // TO DEBUG THE ROOM DATABASE
+    debugCompile 'com.amitshekhar.android:debug-db:1.0.1'
+
 }

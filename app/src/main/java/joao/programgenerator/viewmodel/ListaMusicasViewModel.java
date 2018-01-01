@@ -2,7 +2,6 @@ package joao.programgenerator.viewmodel;
 
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 
@@ -19,16 +18,7 @@ public class ListaMusicasViewModel extends ViewModel{
     private ListaMusicasRepository repo;
     private LiveData<List<String>> partes;
     private LiveData<List<Musica>> raw_musicas;
-    private LiveData<List<String>> musicas = Transformations.map(raw_musicas, input -> {
-
-        ArrayList<String> result = new ArrayList<>();
-
-        for(Musica m: input){
-            result.add(m.getMusic_number() + " - " + m.getMusic_name());
-        }
-
-        return result;
-    });
+    private LiveData<List<String>> musicas;
 
     @Inject
     ListaMusicasViewModel(ListaMusicasRepository repository){
@@ -40,7 +30,16 @@ public class ListaMusicasViewModel extends ViewModel{
 
         partes = repo.getAllPartes();
         raw_musicas = repo.getAllMusicas();
-        musicas = new MutableLiveData<>();
+        musicas = Transformations.map(raw_musicas, input -> {
+
+            ArrayList<String> result = new ArrayList<>();
+
+            for(Musica m: input){
+                result.add(m.getMusic_number() + "-" + m.getMusic_name());
+            }
+
+            return result;
+        });
     }
 
     public LiveData<List<String>> getAllPartes(){
@@ -50,8 +49,19 @@ public class ListaMusicasViewModel extends ViewModel{
 
     public LiveData<List<String>> getMusicasForParte(int parte){
 
-        if(raw_musicas == null)
-            raw_musicas = repo.getMusicasForParte(parte);
+
+        raw_musicas = repo.getMusicasForParte(parte);
+
+        musicas = Transformations.map(raw_musicas, input -> {
+
+            ArrayList<String> result = new ArrayList<>();
+
+            for(Musica m: input){
+                result.add(m.getMusic_number() + " - " + m.getMusic_name());
+            }
+
+            return result;
+        });
 
         return musicas;
     }

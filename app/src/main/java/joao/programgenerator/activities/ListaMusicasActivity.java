@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +34,6 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
     private ExpandableListView listview;
     List<String> listDataHeader = new ArrayList<>();
     HashMap<String, List<String>> listDataChild = new HashMap<>();
-    private PartesMusicaHandler musica_handler;
 
     @Inject
     ViewModelFactory viewModelFactory;
@@ -48,41 +46,74 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
 
         listview = findViewById(R.id.expandableListView);
 
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        listview.setAdapter(listAdapter);
+
         // preparing list data
-
-
         ListaMusicasViewModel listaMusicasViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListaMusicasViewModel.class);
         listaMusicasViewModel.init();
         listaMusicasViewModel.getAllPartes().observe(this, partesNames -> {
             this.listDataHeader = partesNames;
-            listDataChild.put(listDataHeader.get(0), new ArrayList<String>()); // Header, Child data
-            listDataChild.put(listDataHeader.get(1), new ArrayList<String>());
-            listDataChild.put(listDataHeader.get(2), new ArrayList<String>());
-            listDataChild.put(listDataHeader.get(3), new ArrayList<String>());
-            listDataChild.put(listDataHeader.get(4), new ArrayList<String>());
-            listDataChild.put(listDataHeader.get(5), new ArrayList<String>());
-            listDataChild.put(listDataHeader.get(6), new ArrayList<String>());
-            listDataChild.put(listDataHeader.get(7), new ArrayList<String>());
-            listDataChild.put(listDataHeader.get(8), new ArrayList<String>());
-            listDataChild.put(listDataHeader.get(9), new ArrayList<String>());
-            listDataChild.put(listDataHeader.get(10), new ArrayList<String>());
 
-            listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-            listview.setAdapter(listAdapter);
+            listAdapter.setExpandableListTitle(this.listDataHeader);
 
-            //listAdapter.notifyDataSetChanged();
         });
 
         listaMusicasViewModel.getMusicasForParte(1).observe(this, musicas -> {
-
-            this.listDataChild.put(listDataHeader.get(0), musicas);
+            listDataChild.put("Entrada", musicas);
             listAdapter.notifyDataSetChanged();
-
-            Log.d("c", listDataChild.toString());
         });
 
-        // setting list adapter
-        //listview.setAdapter(listAdapter);
+        listaMusicasViewModel.getMusicasForParte(2).observe(this, musicas -> {
+            listDataChild.put("Acto Penitencial", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(3).observe(this, musicas -> {
+            listDataChild.put("Salmo", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(4).observe(this, musicas -> {
+            listDataChild.put("Aleluia", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(5).observe(this, musicas -> {
+            listDataChild.put("Ofertório", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(6).observe(this, musicas -> {
+            listDataChild.put("Santo", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(7).observe(this, musicas -> {
+            listDataChild.put("Pai-nosso", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(8).observe(this, musicas -> {
+            listDataChild.put("Paz", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(9).observe(this, musicas -> {
+            listDataChild.put("Comunhão", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(10).observe(this, musicas -> {
+            listDataChild.put("Acção de Graças", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(11).observe(this, musicas -> {
+            listDataChild.put("Final", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
 
         listview.setOnItemLongClickListener(this);
         listview.setOnChildClickListener(this);
@@ -99,9 +130,6 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_addmusic:  Intent intent = new Intent(ListaMusicasActivity.this, NovaMusicaActivity.class);
                                         intent.putExtra("music_number", -1);
@@ -111,32 +139,22 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
 
                                         return true;
 
-            case R.id.action_help:      return helpDialog();
+            case R.id.action_help:
+
+                AlertDialog dialog = new AlertDialog.Builder(this).create();
+                dialog.setTitle(getString(R.string.help_title));
+                dialog.setMessage(getString(R.string.help_message));
+                dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), (dialog1, which) -> {
+
+                });
+
+                dialog.show();
+
+                return true;
 
             default:	return super.onOptionsItemSelected(item);
 
         }
-    }
-
-    private boolean helpDialog(){
-
-        AlertDialog dialog = new AlertDialog.Builder(this).create();
-        dialog.setTitle(getString(R.string.help_title));
-        dialog.setMessage(getString(R.string.help_message));
-        dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-
-        dialog.show();
-
-        return true;
-
-
     }
 
     @Override
@@ -184,13 +202,8 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
                 }
             });
 
-            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.nao), new DialogInterface.OnClickListener() {
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.nao), (dialog1, which) -> {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
-
-                }
             });
 
             dialog.show();
@@ -235,7 +248,7 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
             else intent.putExtra("music_name", music_number_name[1]);
             intent.putExtra("music_parts", partes);
 
-        startActivity(intent);
+            startActivity(intent);
             finish();
 
 

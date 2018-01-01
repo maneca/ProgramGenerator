@@ -1,11 +1,11 @@
 package joao.programgenerator.activities;
 
 import android.app.AlertDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckedTextView;
@@ -14,93 +14,105 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import joao.programgenerator.R;
-import joao.programgenerator.database.PartesMusicaHandler;
+import javax.inject.Inject;
 
-public class NovaMusicaActivity extends AppCompatActivity implements View.OnClickListener {
+import dagger.android.AndroidInjection;
+import joao.programgenerator.R;
+import joao.programgenerator.dependencyInjection.Injectable;
+import joao.programgenerator.dependencyInjection.ViewModelFactory;
+import joao.programgenerator.viewmodel.MusicaViewModel;
+
+public class NovaMusicaActivity extends AppCompatActivity implements Injectable, View.OnClickListener {
 
     private EditText numero, nome;
     private CheckedTextView entrada , salmo, aleluia, acto_penitencial, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
     private ArrayList<Integer> selected = new ArrayList<>(), original = new ArrayList<>();
-    private String original_name;
-
+    @Inject
+    ViewModelFactory viewModelFactory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_musica);
 
         Bundle b = getIntent().getExtras();
 
-
         // NUMERO DA MUSICA
-        numero = (EditText) findViewById(R.id.numero_musica);
-        nome = (EditText) findViewById(R.id.nome_musica);
+        numero = findViewById(R.id.numero_musica);
+        nome = findViewById(R.id.nome_musica);
 
         // CHECKBOXES
-        entrada = (CheckedTextView) findViewById(R.id.entrada);
-        salmo = (CheckedTextView) findViewById(R.id.salmo);
-        aleluia = (CheckedTextView) findViewById(R.id.aleluia);
-        acto_penitencial = (CheckedTextView) findViewById(R.id.acto_penitencial);
-        ofertorio = (CheckedTextView) findViewById(R.id.ofertorio);
-        santo = (CheckedTextView) findViewById(R.id.santo);
-        pai_nosso = (CheckedTextView) findViewById(R.id.pai_nosso);
-        paz = (CheckedTextView) findViewById(R.id.paz);
-        comunhao = (CheckedTextView) findViewById(R.id.comunhao);
-        accao_gracas = (CheckedTextView) findViewById(R.id.accao_gracas);
-        final_ = (CheckedTextView) findViewById(R.id.final_);
+        entrada = findViewById(R.id.entrada);
+        salmo = findViewById(R.id.salmo);
+        aleluia = findViewById(R.id.aleluia);
+        acto_penitencial = findViewById(R.id.acto_penitencial);
+        ofertorio = findViewById(R.id.ofertorio);
+        santo = findViewById(R.id.santo);
+        pai_nosso = findViewById(R.id.pai_nosso);
+        paz = findViewById(R.id.paz);
+        comunhao = findViewById(R.id.comunhao);
+        accao_gracas = findViewById(R.id.accao_gracas);
+        final_ = findViewById(R.id.final_);
 
         if(b.getInt("music_number")!=-1){
             setTitle(getString(R.string.editar_musica));
 
-            numero.setText("" + b.getInt("music_number"));
+            numero.setText(String.valueOf(b.getInt("music_number")));
         }
         else setTitle(getString(R.string.nova_musica));
 
-        original_name = b.getString("music_name");
         nome.setText(b.getString("music_name"));
 
         if(b.getIntegerArrayList("music_parts")!=null){
 
             for(int parte: b.getIntegerArrayList("music_parts")){
-
-                Log.d("parte", ""+parte);
-
                 original.add(parte);
 
                 switch(parte){
 
-                    case 1: entrada.setChecked(true);
+                    case 1:
+                        entrada.setChecked(true);
                         break;
 
-                    case 2: acto_penitencial.setChecked(true);
+                    case 2:
+                        acto_penitencial.setChecked(true);
                         break;
 
-                    case 3: salmo.setChecked(true);
+                    case 3:
+                        salmo.setChecked(true);
                         break;
 
-                    case 4: aleluia.setChecked(true);
+                    case 4:
+                        aleluia.setChecked(true);
                         break;
 
-                    case 5: ofertorio.setChecked(true);
+                    case 5:
+                        ofertorio.setChecked(true);
                         break;
 
-                    case 6: santo.setChecked(true);
+                    case 6:
+                        santo.setChecked(true);
                         break;
 
-                    case 7: pai_nosso.setChecked(true);
+                    case 7:
+                        pai_nosso.setChecked(true);
                         break;
 
-                    case 8: paz.setChecked(true);
+                    case 8:
+                        paz.setChecked(true);
                         break;
 
-                    case 9: comunhao.setChecked(true);
+                    case 9:
+                        comunhao.setChecked(true);
                         break;
 
-                    case 10:    accao_gracas.setChecked(true);
+                    case 10:
+                        accao_gracas.setChecked(true);
                         break;
 
-                    case 11:    final_.setChecked(true);
+                    case 11:
+                        final_.setChecked(true);
                         break;
                 }
 
@@ -110,8 +122,8 @@ public class NovaMusicaActivity extends AppCompatActivity implements View.OnClic
 
         selected = (ArrayList<Integer>) original.clone();
 
-        Button ok = (Button) findViewById(R.id.ok);
-        Button cancel = (Button) findViewById(R.id.cancel);
+        Button ok = findViewById(R.id.ok);
+        Button cancel = findViewById(R.id.cancel);
 
         entrada.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,27 +256,13 @@ public class NovaMusicaActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
 
         switch(v.getId()){
-            case R.id.ok:   saveOrEditMusic();
-
-                AlertDialog dialog = new AlertDialog.Builder(this).create();
-                dialog.setTitle(getString(R.string.operation_title));
-                dialog.setMessage(getString(R.string.operation_message));
-                dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Intent intent = new Intent(NovaMusicaActivity.this, ListaMusicasActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-
-                dialog.show();
+            case R.id.ok:
+                saveOrEditMusic();
 
                 break;
 
-            case R.id.cancel:   Intent intent = new Intent(NovaMusicaActivity.this, ListaMusicasActivity.class);
+            case R.id.cancel:
+                Intent intent = new Intent(NovaMusicaActivity.this, ListaMusicasActivity.class);
                 startActivity(intent);
                 finish();
 
@@ -273,9 +271,7 @@ public class NovaMusicaActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void saveOrEditMusic(){
-        PartesMusicaHandler musica_handler = new PartesMusicaHandler(getApplicationContext());
-
-        musica_handler.open();
+        MusicaViewModel musicaViewModel = ViewModelProviders.of(this, viewModelFactory).get(MusicaViewModel.class);
 
         String musica = numero.getText().toString();
         String name = nome.getText().toString();
@@ -290,7 +286,7 @@ public class NovaMusicaActivity extends AppCompatActivity implements View.OnClic
 
             if(getTitle().toString().contains("Editar")){
 
-                ArrayList<Integer> to_add = (ArrayList<Integer>) selected.clone();
+               /* ArrayList<Integer> to_add = (ArrayList<Integer>) selected.clone();
                 to_add.removeAll(original);
 
                 ArrayList<Integer> to_remove = (ArrayList<Integer>) original.clone();
@@ -308,48 +304,54 @@ public class NovaMusicaActivity extends AppCompatActivity implements View.OnClic
 
                 if(!original_name.equals(name)){
                         musica_handler.updateNameMusica(number, name);
-                }
+                }*/
 
             }else {
 
-
-
                 if (entrada.isChecked())
-                    musica_handler.insertParteMusica(1, number, name);
+                    musicaViewModel.insertMusica(1, number, name);
 
                 if (acto_penitencial.isChecked())
-                    musica_handler.insertParteMusica(2, number, name);
+                    musicaViewModel.insertMusica(2, number, name);
 
                 if (salmo.isChecked())
-                    musica_handler.insertParteMusica(3, number, name);
+                    musicaViewModel.insertMusica(3, number, name);
 
                 if (aleluia.isChecked())
-                    musica_handler.insertParteMusica(4, number, name);
+                    musicaViewModel.insertMusica(4, number, name);
 
                 if (ofertorio.isChecked())
-                    musica_handler.insertParteMusica(5, number, name);
+                    musicaViewModel.insertMusica(5, number, name);
 
                 if (santo.isChecked())
-                    musica_handler.insertParteMusica(6, number, name);
+                    musicaViewModel.insertMusica(6, number, name);
 
                 if (pai_nosso.isChecked())
-                    musica_handler.insertParteMusica(7, number, name);
+                    musicaViewModel.insertMusica(7, number, name);
 
                 if (paz.isChecked())
-                    musica_handler.insertParteMusica(8, number, name);
+                    musicaViewModel.insertMusica(8, number, name);
 
                 if (comunhao.isChecked())
-                    musica_handler.insertParteMusica(9, number, name);
+                    musicaViewModel.insertMusica(9, number, name);
 
                 if (accao_gracas.isChecked())
-                    musica_handler.insertParteMusica(10, number, name);
+                    musicaViewModel.insertMusica(10, number, name);
 
                 if (final_.isChecked())
-                    musica_handler.insertParteMusica(11, number, name);
+                    musicaViewModel.insertMusica(11, number, name);
             }
-        }
 
-        musica_handler.close();
+            AlertDialog dialog = new AlertDialog.Builder(this).create();
+            dialog.setTitle(getString(R.string.operation_title));
+            dialog.setMessage(getString(R.string.operation_message));
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), (dialog1, which) -> {
+
+                finish();
+            });
+
+            dialog.show();
+        }
 
     }
 }

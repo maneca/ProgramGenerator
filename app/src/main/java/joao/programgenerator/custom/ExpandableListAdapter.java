@@ -27,6 +27,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this.expandableListDetail = expandableListDetail;
     }
 
+    public void setExpandableListTitle(List<String> titles){
+        this.expandableListTitle = titles;
+        notifyDataSetChanged();
+    }
+
     @Override
     public Object getChild(int listPosition, int expandedListPosition) {
         return this.expandableListDetail.get(this.expandableListTitle.get(listPosition))

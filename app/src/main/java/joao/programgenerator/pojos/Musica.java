@@ -12,7 +12,7 @@ import android.arch.persistence.room.PrimaryKey;
         })
 public class Musica {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private int parte_eucaristia_id;
     private int music_number;
