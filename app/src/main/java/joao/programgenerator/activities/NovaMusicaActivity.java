@@ -27,6 +27,7 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
     private EditText numero, nome;
     private CheckedTextView entrada , salmo, aleluia, acto_penitencial, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
     private ArrayList<Integer> selected = new ArrayList<>(), original = new ArrayList<>();
+    private String original_name;
     @Inject
     ViewModelFactory viewModelFactory;
 
@@ -57,7 +58,7 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
 
         if(b.getInt("music_number")!=-1){
             setTitle(getString(R.string.editar_musica));
-
+            original_name = b.getString("music_name");
             numero.setText(String.valueOf(b.getInt("music_number")));
         }
         else setTitle(getString(R.string.nova_musica));
@@ -125,125 +126,92 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
         Button ok = findViewById(R.id.ok);
         Button cancel = findViewById(R.id.cancel);
 
-        entrada.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(entrada.isChecked()){
-                    selected.remove((Integer) 1);
-                }else selected.add(1);
+        entrada.setOnClickListener(v -> {
+            if(entrada.isChecked()){
+                selected.remove((Integer) 1);
+            }else selected.add(1);
 
-                entrada.toggle();
-            }
+            entrada.toggle();
         });
 
-        acto_penitencial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(acto_penitencial.isChecked()){
-                    selected.remove((Integer) 2);
-                }else selected.add(2);
+        acto_penitencial.setOnClickListener(v -> {
+            if(acto_penitencial.isChecked()){
+                selected.remove((Integer) 2);
+            }else selected.add(2);
 
-                acto_penitencial.toggle();
-            }
+            acto_penitencial.toggle();
         });
 
-        salmo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(salmo.isChecked()){
-                    selected.remove((Integer) 3);
-                }else selected.add(3);
+        salmo.setOnClickListener(v -> {
+            if(salmo.isChecked()){
+                selected.remove((Integer) 3);
+            }else selected.add(3);
 
-                salmo.toggle();
-            }
+            salmo.toggle();
         });
 
-        aleluia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(aleluia.isChecked()){
-                    selected.remove((Integer) 4);
-                }else selected.add(4);
+        aleluia.setOnClickListener(v -> {
+            if(aleluia.isChecked()){
+                selected.remove((Integer) 4);
+            }else selected.add(4);
 
-                aleluia.toggle();
-            }
+            aleluia.toggle();
         });
 
-        ofertorio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(ofertorio.isChecked()){
-                    selected.remove((Integer) 5);
-                }else selected.add(5);
+        ofertorio.setOnClickListener(v -> {
+            if(ofertorio.isChecked()){
+                selected.remove((Integer) 5);
+            }else selected.add(5);
 
-                ofertorio.toggle();
-            }
+            ofertorio.toggle();
         });
 
-        santo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(santo.isChecked()){
-                    selected.remove((Integer) 6);
-                }else selected.add(6);
+        santo.setOnClickListener(v -> {
+            if(santo.isChecked()){
+                selected.remove((Integer) 6);
+            }else selected.add(6);
 
-                santo.toggle();
-            }
+            santo.toggle();
         });
 
-        pai_nosso.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(pai_nosso.isChecked()){
-                    selected.remove((Integer) 7);
-                }else selected.add(7);
+        pai_nosso.setOnClickListener(v -> {
+            if(pai_nosso.isChecked()){
+                selected.remove((Integer) 7);
+            }else selected.add(7);
 
-                pai_nosso.toggle();
-            }
+            pai_nosso.toggle();
         });
 
-        paz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(paz.isChecked()){
-                    selected.remove((Integer) 8);
-                }else selected.add(8);
+        paz.setOnClickListener(v -> {
+            if(paz.isChecked()){
+                selected.remove((Integer) 8);
+            }else selected.add(8);
 
-                paz.toggle();
-            }
+            paz.toggle();
         });
 
-        comunhao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(comunhao.isChecked()){
-                    selected.remove((Integer) 9);
-                }else selected.add(9);
+        comunhao.setOnClickListener(v -> {
+            if(comunhao.isChecked()){
+                selected.remove((Integer) 9);
+            }else selected.add(9);
 
-                comunhao.toggle();
-            }
+            comunhao.toggle();
         });
 
-        accao_gracas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(accao_gracas.isChecked()){
-                    selected.remove((Integer) 10);
-                }else selected.add(10);
+        accao_gracas.setOnClickListener(v -> {
+            if(accao_gracas.isChecked()){
+                selected.remove((Integer) 10);
+            }else selected.add(10);
 
-                accao_gracas.toggle();
-            }
+            accao_gracas.toggle();
         });
 
-        final_.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(final_.isChecked()){
-                    selected.remove((Integer) 11);
-                }else selected.add(11);
+        final_.setOnClickListener(v -> {
+            if(final_.isChecked()){
+                selected.remove((Integer) 11);
+            }else selected.add(11);
 
-                final_.toggle();
-            }
+            final_.toggle();
         });
 
         ok.setOnClickListener(this);
@@ -286,7 +254,7 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
 
             if(getTitle().toString().contains("Editar")){
 
-               /* ArrayList<Integer> to_add = (ArrayList<Integer>) selected.clone();
+                ArrayList<Integer> to_add = (ArrayList<Integer>) selected.clone();
                 to_add.removeAll(original);
 
                 ArrayList<Integer> to_remove = (ArrayList<Integer>) original.clone();
@@ -294,17 +262,17 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
 
 
                 for(int parte: to_remove) {
-                    musica_handler.removeParteMusica(parte, number);
+                    musicaViewModel.removeParteFromMusica(parte, number);
                 }
 
                 for(int parte: to_add){
-                    musica_handler.insertParteMusica(parte, number, name);
+                    musicaViewModel.insertMusica(parte, number, name);
                 }
 
 
                 if(!original_name.equals(name)){
-                        musica_handler.updateNameMusica(number, name);
-                }*/
+                        musicaViewModel.updateNameMusica(name, number);
+                }
 
             }else {
 
@@ -345,10 +313,7 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
             AlertDialog dialog = new AlertDialog.Builder(this).create();
             dialog.setTitle(getString(R.string.operation_title));
             dialog.setMessage(getString(R.string.operation_message));
-            dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), (dialog1, which) -> {
-
-                finish();
-            });
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok), (dialog1, which) -> finish());
 
             dialog.show();
         }

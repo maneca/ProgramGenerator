@@ -16,8 +16,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/numero"/>
@@ -25,7 +25,7 @@
         <EditText
             android:id="@+id/numero_musica"
             android:layout_height="wrap_content"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:inputType="number"/>
 
@@ -40,8 +40,8 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/nome"/>
@@ -49,7 +49,7 @@
         <EditText
             android:id="@+id/nome_musica"
             android:layout_height="wrap_content"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_weight="0.63" />
 
     </LinearLayout>
@@ -69,7 +69,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/entrada"/>
+            android:hint="@string/entrada"
+            android:focusable="true" />
 
         <CheckedTextView
             android:id="@+id/acto_penitencial"
@@ -80,7 +81,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/acto_penitencial"/>
+            android:hint="@string/acto_penitencial"
+            android:focusable="true" />
 
     </LinearLayout>
 
@@ -98,7 +100,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/salmo"/>
+            android:hint="@string/salmo"
+            android:focusable="true" />
 
         <CheckedTextView
             android:id="@+id/aleluia"
@@ -109,7 +112,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/aleluia"/>
+            android:hint="@string/aleluia"
+            android:focusable="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -126,7 +130,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/ofertorio"/>
+            android:hint="@string/ofertorio"
+            android:focusable="true" />
 
         <CheckedTextView
             android:id="@+id/santo"
@@ -137,7 +142,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/santo"/>
+            android:hint="@string/santo"
+            android:focusable="true" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -153,7 +159,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/pai_nosso"/>
+            android:hint="@string/pai_nosso"
+            android:focusable="true" />
 
         <CheckedTextView
             android:id="@+id/paz"
@@ -164,7 +171,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/paz"/>
+            android:hint="@string/paz"
+            android:focusable="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -181,7 +189,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/comunhao"/>
+            android:hint="@string/comunhao"
+            android:focusable="true" />
 
         <CheckedTextView
             android:id="@+id/accao_gracas"
@@ -192,7 +201,8 @@
             android:clickable="true"
             android:checked="false"
             android:gravity="center"
-            android:hint="@string/accao_gracas"/>
+            android:hint="@string/accao_gracas"
+            android:focusable="true" />
 
     </LinearLayout>
 
@@ -203,7 +213,7 @@
 
         <CheckedTextView
             android:id="@+id/final_"
-            android:layout_width="125dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:clickable="true"
@@ -211,7 +221,8 @@
             android:checked="false"
             android:gravity="center"
             android:hint="@string/final_"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:focusable="true" />
 
 
     </LinearLayout>

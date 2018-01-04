@@ -5,7 +5,6 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -20,12 +19,23 @@ public interface MusicaDao {
     @Insert
     void insertMusica(Musica musica);
 
-    @Update
-    void updateMusica(Musica musica);
+    @Query("UPDATE Musicas SET music_name = :name WHERE music_number = :number")
+    void updateNameMusica(String name, int number);
 
     @Delete
-    void deleteMusica(Musica musica);
+    void deleteMusica(Musica m);
+
+    @Query("DELETE FROM Musicas WHERE parte_eucaristia_id = :parte AND music_number = :number")
+    void removeParteFromMusica(int parte, int number);
+
+    @Query("SELECT parte_eucaristia_id FROM Musicas WHERE music_number = :number")
+    List<Integer> getPartesFromMusica(int number);
 
     @Query("SELECT * FROM Musicas WHERE parte_eucaristia_id = :parte")
     LiveData<List<Musica>> getMusicasFromParte(int parte);
+
+    @Query("SELECT * FROM Musicas WHERE parte_eucaristia_id = :parte")
+    List<Musica> getListOfMusicas(int parte);
+
+
 }

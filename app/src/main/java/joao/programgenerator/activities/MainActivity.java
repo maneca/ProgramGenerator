@@ -1,7 +1,6 @@
 package joao.programgenerator.activities;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -45,38 +44,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                                         // Set the dialog title
                                         builder.setTitle("Partes especiais")
-                                               .setMultiChoiceItems(R.array.parts_array, null,
-                                                       new DialogInterface.OnMultiChoiceClickListener() {
-                                                           @Override
-                                                           public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                                               if (isChecked)
-                                                                   mSelectedItems.add(which);
-                                                               else if (mSelectedItems.contains(which))
-                                                                   mSelectedItems.remove(Integer.valueOf(which));
-                                                           }
+                                               .setMultiChoiceItems(R.array.parts_array, null, (dialog, which, isChecked) -> {
+                                                           if (isChecked)
+                                                               mSelectedItems.add(which);
+                                                           else if (mSelectedItems.contains(which))
+                                                               mSelectedItems.remove(Integer.valueOf(which));
                                                        })
-                                        // Set the action buttons
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int id) {
+                                        .setPositiveButton("OK", (dialog, id) -> {
 
-                                                Intent intent = new Intent(MainActivity.this, ProgramaActivity.class);
+                                            Intent intent1 = new Intent(MainActivity.this, ProgramaActivity.class);
 
-                                                Bundle bundle = new Bundle();
+                                            Bundle bundle = new Bundle();
 
-                                                bundle.putCharSequenceArrayList("escolhidas", mSelectedItems);
+                                            bundle.putCharSequenceArrayList("escolhidas", mSelectedItems);
 
-                                                intent.putExtras(bundle);
+                                            intent1.putExtras(bundle);
 
-                                                startActivity(intent);
+                                            startActivity(intent1);
 
-                                            }
                                         })
-                                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int id) {
+                                        .setNegativeButton("Cancelar", (dialog, id) -> {
 
-                                            }
                                         });
 
                                         builder.create();
@@ -102,7 +90,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings: Intent intent = new Intent(this, SettingsActivity.class);
+            case R.id.action_settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 finish();
                 return true;

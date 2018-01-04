@@ -6,6 +6,7 @@ import dagger.android.ContributesAndroidInjector;
 import joao.programgenerator.activities.ListaMusicasActivity;
 import joao.programgenerator.activities.MainActivity;
 import joao.programgenerator.activities.NovaMusicaActivity;
+import joao.programgenerator.activities.ProgramaActivity;
 
 @Module
 public abstract class ActivityModule {
@@ -19,5 +20,6 @@ public abstract class ActivityModule {
     @ContributesAndroidInjector
     abstract NovaMusicaActivity contributeNovaMusicaActivity();
 
-
+    @ContributesAndroidInjector
+    abstract ProgramaActivity contributeProgramaActivity();
 }

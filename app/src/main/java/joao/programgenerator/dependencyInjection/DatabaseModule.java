@@ -21,13 +21,14 @@ import joao.programgenerator.database.dao.MusicaDao;
 import joao.programgenerator.database.dao.PartesEucaristiaDao;
 
 @Module
-public class DatabaseModule {
+class DatabaseModule {
 
     @Singleton
     @Provides
     AppDatabase provideDb(Application app) {
         return Room.databaseBuilder(app, AppDatabase.class,"programgenerator.db")
                 .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
                 .addCallback(new RoomDatabase.Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {

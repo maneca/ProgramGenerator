@@ -27,4 +27,14 @@ public class MusicaViewModel extends ViewModel{
 
         repository.insertMusica(m);
     }
+
+    public void removeParteFromMusica(int parte, int number){
+
+        repository.removeParteFromMusica(parte, number);
+    }
+
+    public void updateNameMusica(String name, int number){
+
+        repository.updateNameMusica(name, number);
+    }
 }

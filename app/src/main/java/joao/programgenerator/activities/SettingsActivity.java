@@ -1,34 +1,30 @@
 package joao.programgenerator.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-
 import joao.programgenerator.R;
 
-public class SettingsActivity extends Activity implements AdapterView.OnItemClickListener{
+public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     public static final String PREFS_NAME = "MyPrefsFile";
-    private ListView settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        settings = (ListView) findViewById(R.id.listView);
+        ListView settings = findViewById(R.id.listView);
 
         String[] options = {"Informacao que aparece no programa"};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, options);
 
         settings.setAdapter(adapter);
 
@@ -38,7 +34,6 @@ public class SettingsActivity extends Activity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final ArrayList mSelectedItems = new ArrayList();
 
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
         String nome_numero = sharedPreferences.getString("nome_numero", "Numero");
@@ -49,33 +44,22 @@ public class SettingsActivity extends Activity implements AdapterView.OnItemClic
         else checked = 1;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setSingleChoiceItems(R.array.numero_ou_nome, checked,
-                new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(R.array.numero_ou_nome, checked, (dialog, which) -> {
+                    String[] options = getResources().getStringArray(R.array.numero_ou_nome);
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String[] options = getResources().getStringArray(R.array.numero_ou_nome);
+                    SharedPreferences sharedPreferences1 = getSharedPreferences(PREFS_NAME, 0);
+                    SharedPreferences.Editor editor = sharedPreferences1.edit();
+                    editor.putString("nome_numero", options[which]);
+                    editor.apply();
 
-                        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("nome_numero", options[which]);
-                        editor.apply();
+                }).setPositiveButton("OK", (dialog, id1) -> {
 
-                    }
-                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    SharedPreferences sharedPreferences12 = getSharedPreferences(PREFS_NAME, 0);
+                    String nome_numero1 = sharedPreferences12.getString("nome_numero", "");
 
-                        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
-                        String nome_numero = sharedPreferences.getString("nome_numero", "");
+                    Log.d("index", nome_numero1);
+                }).setNegativeButton("Cancelar", (dialog, id12) -> {
 
-                        Log.d("index", nome_numero);
-                    }
-                }).setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick (DialogInterface dialog,int id){
-
-                    }
                 }
 
         );

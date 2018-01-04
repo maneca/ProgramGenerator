@@ -33,6 +33,8 @@
     <string name="help_title">Ajuda</string>
     <string name="help_message">Para apagar uma música, clique durante algum tempo na música que deseja apagar.</string>
 
+    <string name="nd">ND</string>
+
     <string-array name="parts_array">
         <item>Acto Penitencial</item>
         <item>Salmo</item>

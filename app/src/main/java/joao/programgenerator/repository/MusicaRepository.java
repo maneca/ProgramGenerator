@@ -24,4 +24,13 @@ public class MusicaRepository {
 
         executor.execute(() -> musicaDao.insertMusica(m));
     }
+
+    public void removeParteFromMusica(int parte, int number){
+
+        executor.execute(() -> musicaDao.removeParteFromMusica(parte, number));
+    }
+
+    public void updateNameMusica(String name, int number){
+        executor.execute(() -> musicaDao.updateNameMusica(name, number));
+    }
 }

@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -22,9 +21,9 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 import joao.programgenerator.R;
 import joao.programgenerator.custom.ExpandableListAdapter;
-import joao.programgenerator.database.PartesMusicaHandler;
 import joao.programgenerator.dependencyInjection.Injectable;
 import joao.programgenerator.dependencyInjection.ViewModelFactory;
+import joao.programgenerator.pojos.Musica;
 import joao.programgenerator.viewmodel.ListaMusicasViewModel;
 
 
@@ -32,8 +31,9 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
 
     private ExpandableListAdapter listAdapter;
     private ExpandableListView listview;
-    List<String> listDataHeader = new ArrayList<>();
-    HashMap<String, List<String>> listDataChild = new HashMap<>();
+    private List<String> listDataHeader = new ArrayList<>();
+    private HashMap<String, List<Musica>> listDataChild = new HashMap<>();
+    private ListaMusicasViewModel listaMusicasViewModel;
 
     @Inject
     ViewModelFactory viewModelFactory;
@@ -50,13 +50,12 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
         listview.setAdapter(listAdapter);
 
         // preparing list data
-        ListaMusicasViewModel listaMusicasViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListaMusicasViewModel.class);
+        listaMusicasViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListaMusicasViewModel.class);
         listaMusicasViewModel.init();
         listaMusicasViewModel.getAllPartes().observe(this, partesNames -> {
             this.listDataHeader = partesNames;
 
             listAdapter.setExpandableListTitle(this.listDataHeader);
-
         });
 
         listaMusicasViewModel.getMusicasForParte(1).observe(this, musicas -> {
@@ -131,13 +130,14 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_addmusic:  Intent intent = new Intent(ListaMusicasActivity.this, NovaMusicaActivity.class);
-                                        intent.putExtra("music_number", -1);
+            case R.id.action_addmusic:
+                Intent intent = new Intent(ListaMusicasActivity.this, NovaMusicaActivity.class);
+                intent.putExtra("music_number", -1);
 
-                                        startActivity(intent);
-                                        finish();
+                startActivity(intent);
+                finish();
 
-                                        return true;
+                return true;
 
             case R.id.action_help:
 
@@ -152,7 +152,8 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
 
                 return true;
 
-            default:	return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
 
         }
     }
@@ -168,38 +169,20 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
         final int groupPos = ExpandableListView.getPackedPositionGroup(pos);
         final int childPos = ExpandableListView.getPackedPositionChild(pos);
 
-        String music_name = (String) listAdapter.getChild(groupPos, childPos);
+        Musica musica = (Musica) listAdapter.getChild(groupPos, childPos);
 
         // if child is long-clicked
-        if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD &&
-                !music_name.equalsIgnoreCase(getString(R.string.musica_definida))) {
+        if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD ) {
             AlertDialog dialog = new AlertDialog.Builder(this).create();
             dialog.setTitle(getString(R.string.apagar_musica_titulo));
             dialog.setMessage(getString(R.string.apagar_musica_texto));
-            dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.sim), new DialogInterface.OnClickListener() {
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.sim), (dialog12, which) -> {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
-                    String[] musica_parte = ((String) listAdapter.getChild(groupPos, childPos)).split("-");
+                listaMusicasViewModel.deleteMusica(musica);
+                listview.collapseGroup(groupPos);
 
-                    int musica = Integer.parseInt(musica_parte[0]);
+                listDataChild.get(listDataHeader.get(groupPos)).remove(listAdapter.getChild(groupPos, childPos));
 
-                    PartesMusicaHandler musicaHandler = new PartesMusicaHandler(getApplicationContext());
-
-                    musicaHandler.open();
-
-                    musicaHandler.removeParteMusica(groupPos+1, musica);
-                    listview.collapseGroup(groupPos);
-
-                    listDataChild.get(listDataHeader.get(groupPos)).remove(listAdapter.getChild(groupPos, childPos));
-
-                    musicaHandler.close();
-
-                    if(listDataChild.get(listDataHeader.get(groupPos)).size()==0)
-                        listDataChild.get(listDataHeader.get(groupPos)).add(getString(R.string.musica_definida));
-
-                }
             });
 
             dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.nao), (dialog1, which) -> {
@@ -207,8 +190,6 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
             });
 
             dialog.show();
-
-
         }
         return false;
     }
@@ -217,40 +198,15 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
     public boolean onChildClick(ExpandableListView parent, View v, int groupPos, int childPos, long id) {
 
 
-            String music = (String) listAdapter.getChild(groupPos, childPos);
+        Musica music = (Musica) listAdapter.getChild(groupPos, childPos);
 
-            String[] music_number_name = music.split("-");
+        Intent intent = new Intent(ListaMusicasActivity.this, NovaMusicaActivity.class);
+        intent.putExtra("music_number", music.getMusic_number());
+        intent.putExtra("music_name", music.getMusic_name());
 
+        intent.putExtra("music_parts", listaMusicasViewModel.getPartesfromMusica(music.getMusic_number()));
 
-            int number = Integer.parseInt(music_number_name[0]);
-
-            Intent intent = new Intent(ListaMusicasActivity.this, NovaMusicaActivity.class);
-
-            PartesMusicaHandler partesMusicaHandler = new PartesMusicaHandler(this);
-            partesMusicaHandler.open();
-
-            Cursor c = partesMusicaHandler.getPartesForMusica(number);
-            c.moveToFirst();
-
-            ArrayList<Integer> partes = new ArrayList<Integer>();
-
-            while(!c.isAfterLast()){
-
-                partes.add(c.getInt(0));
-                c.moveToNext();
-            }
-
-            partesMusicaHandler.close();
-
-            intent.putExtra("music_number", number);
-            if(music_number_name[1].equalsIgnoreCase("null"))
-                intent.putExtra("music_name", "");
-            else intent.putExtra("music_name", music_number_name[1]);
-            intent.putExtra("music_parts", partes);
-
-            startActivity(intent);
-            finish();
-
+        startActivity(intent);
 
         return false;
     }

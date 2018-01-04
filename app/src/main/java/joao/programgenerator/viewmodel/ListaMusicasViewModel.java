@@ -2,7 +2,6 @@ package joao.programgenerator.viewmodel;
 
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 
 import java.util.ArrayList;
@@ -17,8 +16,6 @@ public class ListaMusicasViewModel extends ViewModel{
 
     private ListaMusicasRepository repo;
     private LiveData<List<String>> partes;
-    private LiveData<List<Musica>> raw_musicas;
-    private LiveData<List<String>> musicas;
 
     @Inject
     ListaMusicasViewModel(ListaMusicasRepository repository){
@@ -29,17 +26,6 @@ public class ListaMusicasViewModel extends ViewModel{
     public void init(){
 
         partes = repo.getAllPartes();
-        raw_musicas = repo.getAllMusicas();
-        musicas = Transformations.map(raw_musicas, input -> {
-
-            ArrayList<String> result = new ArrayList<>();
-
-            for(Musica m: input){
-                result.add(m.getMusic_number() + "-" + m.getMusic_name());
-            }
-
-            return result;
-        });
     }
 
     public LiveData<List<String>> getAllPartes(){
@@ -47,23 +33,24 @@ public class ListaMusicasViewModel extends ViewModel{
         return partes;
     }
 
-    public LiveData<List<String>> getMusicasForParte(int parte){
+    public LiveData<List<Musica>> getMusicasForParte(int parte){
 
+        return repo.getMusicasForParte(parte);
+    }
 
-        raw_musicas = repo.getMusicasForParte(parte);
+    public ArrayList<Musica> getListOfMusicas(int parte){
 
-        musicas = Transformations.map(raw_musicas, input -> {
+        return (ArrayList<Musica>) repo.getListOfMusicas(parte);
+    }
 
-            ArrayList<String> result = new ArrayList<>();
+    public ArrayList<Integer> getPartesfromMusica(int music_number){
 
-            for(Musica m: input){
-                result.add(m.getMusic_number() + " - " + m.getMusic_name());
-            }
+        return (ArrayList<Integer>) repo.getPartesFromMusica(music_number);
+    }
 
-            return result;
-        });
+    public void deleteMusica(Musica m){
 
-        return musicas;
+        repo.deleteMusica(m);
     }
 
 }
