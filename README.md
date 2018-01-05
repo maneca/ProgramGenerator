@@ -5,6 +5,6 @@ It is populated by the user.
 It is only in portuguese.
 
 <a href="https://play.google.com/store/apps/details?id=joao.programgenerator">
-<img width="300" height="300" src="https://upload.wikimedia.org/wikipedia/en/7/77/Android-app-on-google-play.svg" />
+<img width="200" height="100" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
 </a>
 
