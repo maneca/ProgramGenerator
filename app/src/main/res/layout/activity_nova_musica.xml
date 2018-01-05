@@ -1,252 +1,257 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:orientation="vertical"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="joao.programgenerator.activities.NovaMusicaActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="51dp"
+        android:text="@string/numero"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/numero_musica"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/numero"/>
-
-        <EditText
-            android:id="@+id/numero_musica"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:inputType="number"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/numero_musica"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginEnd="8dp"
+        android:inputType="number"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/nome"/>
 
-        <EditText
-            android:id="@+id/nome_musica"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="0.63" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginEnd="8dp"
+        android:text="@string/nome"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/nome_musica"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView" />
 
-        <CheckedTextView
-            android:id="@+id/entrada"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/entrada"
-            android:focusable="true" />
-
-        <CheckedTextView
-            android:id="@+id/acto_penitencial"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/acto_penitencial"
-            android:focusable="true" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <CheckedTextView
-            android:id="@+id/salmo"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/salmo"
-            android:focusable="true" />
-
-        <CheckedTextView
-            android:id="@+id/aleluia"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/aleluia"
-            android:focusable="true" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <CheckedTextView
-            android:id="@+id/ofertorio"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/ofertorio"
-            android:focusable="true" />
-
-        <CheckedTextView
-            android:id="@+id/santo"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/santo"
-            android:focusable="true" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <CheckedTextView
-            android:id="@+id/pai_nosso"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/pai_nosso"
-            android:focusable="true" />
-
-        <CheckedTextView
-            android:id="@+id/paz"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/paz"
-            android:focusable="true" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <CheckedTextView
-            android:id="@+id/comunhao"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/comunhao"
-            android:focusable="true" />
-
-        <CheckedTextView
-            android:id="@+id/accao_gracas"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/accao_gracas"
-            android:focusable="true" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <CheckedTextView
-            android:id="@+id/final_"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-            android:clickable="true"
-            android:layout_weight="1"
-            android:checked="false"
-            android:gravity="center"
-            android:hint="@string/final_"
-            android:layout_gravity="center_vertical"
-            android:focusable="true" />
+    <EditText
+        android:id="@+id/nome_musica"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/entrada"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/numero_musica" />
 
 
-    </LinearLayout>
+    <CheckedTextView
+        android:id="@+id/entrada"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/entrada"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintBaseline_toBaselineOf="@+id/acto_penitencial"
+        app:layout_constraintEnd_toStartOf="@+id/acto_penitencial"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <CheckedTextView
+        android:id="@+id/acto_penitencial"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="171dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/acto_penitencial"
+        android:textColor="@android:color/background_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/entrada"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/ok"
-            android:layout_width="125dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/ok"/>
 
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="125dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/cancelar" />
+    <CheckedTextView
+        android:id="@+id/salmo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/salmo"
+        app:layout_constraintBaseline_toBaselineOf="@+id/aleluia"
+        app:layout_constraintEnd_toStartOf="@+id/aleluia"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    </LinearLayout>
+    <CheckedTextView
+        android:id="@+id/aleluia"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/aleluia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/salmo"
+        app:layout_constraintTop_toBottomOf="@+id/entrada" />
 
-</LinearLayout>
+
+    <CheckedTextView
+        android:id="@+id/ofertorio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/ofertorio"
+        app:layout_constraintBaseline_toBaselineOf="@+id/santo"
+        app:layout_constraintEnd_toStartOf="@+id/santo"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckedTextView
+        android:id="@+id/santo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/santo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ofertorio"
+        app:layout_constraintTop_toBottomOf="@+id/salmo" />
+
+
+    <CheckedTextView
+        android:id="@+id/pai_nosso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/pai_nosso"
+        app:layout_constraintBaseline_toBaselineOf="@+id/paz"
+        app:layout_constraintEnd_toStartOf="@+id/paz"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckedTextView
+        android:id="@+id/paz"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/paz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pai_nosso"
+        app:layout_constraintTop_toBottomOf="@+id/ofertorio" />
+
+
+    <CheckedTextView
+        android:id="@+id/comunhao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/comunhao"
+        app:layout_constraintBaseline_toBaselineOf="@+id/accao_gracas"
+        app:layout_constraintEnd_toStartOf="@+id/accao_gracas"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckedTextView
+        android:id="@+id/accao_gracas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/accao_gracas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/comunhao"
+        app:layout_constraintTop_toBottomOf="@+id/pai_nosso" />
+
+
+    <CheckedTextView
+        android:id="@+id/final_"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/final_"
+        app:layout_constraintEnd_toEndOf="@+id/accao_gracas"
+        app:layout_constraintStart_toStartOf="@+id/comunhao"
+        app:layout_constraintTop_toBottomOf="@+id/comunhao" />
+
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/ok"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cancel"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/cancelar"
+        app:layout_constraintBottom_toBottomOf="@+id/ok"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ok"
+        app:layout_constraintTop_toTopOf="@+id/ok" />
+
+
+</android.support.constraint.ConstraintLayout>

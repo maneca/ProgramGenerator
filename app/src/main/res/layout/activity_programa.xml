@@ -17,7 +17,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/entrada"/>
@@ -37,7 +37,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/acto_penitencial"/>
@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/salmo"/>
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/aleluia"/>
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/ofertorio"/>
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/santo"/>
@@ -131,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/pai_nosso"/>
@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/paz"/>
@@ -167,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/comunhao"/>
@@ -187,7 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/accao_gracas"/>
@@ -205,7 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="#A4C739"
                 android:textStyle="bold"
                 android:text="@string/final_"/>
@@ -219,7 +219,4 @@
          </TableRow>
 
         </TableLayout>
-
-
-
 </ScrollView>
