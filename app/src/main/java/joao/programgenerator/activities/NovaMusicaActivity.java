@@ -25,7 +25,7 @@ import joao.programgenerator.viewmodel.MusicaViewModel;
 public class NovaMusicaActivity extends AppCompatActivity implements Injectable, View.OnClickListener {
 
     private EditText numero, nome;
-    private CheckedTextView entrada , salmo, aleluia, acto_penitencial, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
+    private CheckedTextView entrada , salmo, gloria, aleluia, acto_penitencial, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
     private ArrayList<Integer> selected = new ArrayList<>(), original = new ArrayList<>();
     private String original_name;
     @Inject
@@ -46,6 +46,7 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
         // CHECKBOXES
         entrada = findViewById(R.id.entrada);
         salmo = findViewById(R.id.salmo);
+        gloria = findViewById(R.id.gloria);
         aleluia = findViewById(R.id.aleluia);
         acto_penitencial = findViewById(R.id.acto_penitencial);
         ofertorio = findViewById(R.id.ofertorio);
@@ -81,38 +82,42 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
                         break;
 
                     case 3:
-                        salmo.setChecked(true);
+                        gloria.setChecked(true);
                         break;
 
                     case 4:
-                        aleluia.setChecked(true);
+                        salmo.setChecked(true);
                         break;
 
                     case 5:
-                        ofertorio.setChecked(true);
+                        aleluia.setChecked(true);
                         break;
 
                     case 6:
-                        santo.setChecked(true);
+                        ofertorio.setChecked(true);
                         break;
 
                     case 7:
-                        pai_nosso.setChecked(true);
+                        santo.setChecked(true);
                         break;
 
                     case 8:
-                        paz.setChecked(true);
+                        pai_nosso.setChecked(true);
                         break;
 
                     case 9:
-                        comunhao.setChecked(true);
+                        paz.setChecked(true);
                         break;
 
                     case 10:
-                        accao_gracas.setChecked(true);
+                        comunhao.setChecked(true);
                         break;
 
                     case 11:
+                        accao_gracas.setChecked(true);
+                        break;
+
+                    case 12:
                         final_.setChecked(true);
                         break;
                 }
@@ -142,74 +147,82 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
             acto_penitencial.toggle();
         });
 
-        salmo.setOnClickListener(v -> {
-            if(salmo.isChecked()){
+        gloria.setOnClickListener(v -> {
+            if(gloria.isChecked()){
                 selected.remove((Integer) 3);
             }else selected.add(3);
+
+            gloria.toggle();
+        });
+
+        salmo.setOnClickListener(v -> {
+            if(salmo.isChecked()){
+                selected.remove((Integer) 4);
+            }else selected.add(4);
 
             salmo.toggle();
         });
 
         aleluia.setOnClickListener(v -> {
             if(aleluia.isChecked()){
-                selected.remove((Integer) 4);
-            }else selected.add(4);
+                selected.remove((Integer) 5);
+            }else selected.add(5);
 
             aleluia.toggle();
         });
 
         ofertorio.setOnClickListener(v -> {
             if(ofertorio.isChecked()){
-                selected.remove((Integer) 5);
-            }else selected.add(5);
+                selected.remove((Integer) 6);
+            }else selected.add(6);
 
             ofertorio.toggle();
         });
 
         santo.setOnClickListener(v -> {
             if(santo.isChecked()){
-                selected.remove((Integer) 6);
-            }else selected.add(6);
+                selected.remove((Integer) 7);
+            }else selected.add(7);
 
             santo.toggle();
         });
 
         pai_nosso.setOnClickListener(v -> {
             if(pai_nosso.isChecked()){
-                selected.remove((Integer) 7);
-            }else selected.add(7);
+                selected.remove((Integer) 8);
+            }else selected.add(8);
 
             pai_nosso.toggle();
         });
 
         paz.setOnClickListener(v -> {
             if(paz.isChecked()){
-                selected.remove((Integer) 8);
-            }else selected.add(8);
+                selected.remove((Integer) 9);
+            }else selected.add(9);
 
             paz.toggle();
         });
 
         comunhao.setOnClickListener(v -> {
             if(comunhao.isChecked()){
-                selected.remove((Integer) 9);
-            }else selected.add(9);
+                selected.remove((Integer) 10);
+            }else selected.add(10);
 
             comunhao.toggle();
         });
 
         accao_gracas.setOnClickListener(v -> {
             if(accao_gracas.isChecked()){
-                selected.remove((Integer) 10);
-            }else selected.add(10);
+                selected.remove((Integer) 11);
+            }else selected.add(11);
 
             accao_gracas.toggle();
         });
 
         final_.setOnClickListener(v -> {
             if(final_.isChecked()){
-                selected.remove((Integer) 11);
-            }else selected.add(11);
+                selected.remove((Integer) 12);
+            }else selected.add(12);
 
             final_.toggle();
         });
@@ -245,7 +258,7 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
         String name = nome.getText().toString();
 
         if(musica.equals("") || name.equals("") ||
-                (!entrada.isChecked() && !aleluia.isChecked() && !salmo.isChecked() && !acto_penitencial.isChecked() &&
+                (!entrada.isChecked() && !aleluia.isChecked() && !gloria.isChecked() && !salmo.isChecked() && !acto_penitencial.isChecked() &&
                         !ofertorio.isChecked() && !santo.isChecked() && !pai_nosso.isChecked() &&
                         !paz.isChecked() && !comunhao.isChecked() && !accao_gracas.isChecked() && !final_.isChecked()))
             Toast.makeText(getApplicationContext(), getString(R.string.campos_obrigatorios), Toast.LENGTH_LONG).show();
@@ -282,32 +295,35 @@ public class NovaMusicaActivity extends AppCompatActivity implements Injectable,
                 if (acto_penitencial.isChecked())
                     musicaViewModel.insertMusica(2, number, name);
 
-                if (salmo.isChecked())
+                if(gloria.isChecked())
                     musicaViewModel.insertMusica(3, number, name);
 
-                if (aleluia.isChecked())
+                if (salmo.isChecked())
                     musicaViewModel.insertMusica(4, number, name);
 
-                if (ofertorio.isChecked())
+                if (aleluia.isChecked())
                     musicaViewModel.insertMusica(5, number, name);
 
-                if (santo.isChecked())
+                if (ofertorio.isChecked())
                     musicaViewModel.insertMusica(6, number, name);
 
-                if (pai_nosso.isChecked())
+                if (santo.isChecked())
                     musicaViewModel.insertMusica(7, number, name);
 
-                if (paz.isChecked())
+                if (pai_nosso.isChecked())
                     musicaViewModel.insertMusica(8, number, name);
 
-                if (comunhao.isChecked())
+                if (paz.isChecked())
                     musicaViewModel.insertMusica(9, number, name);
 
-                if (accao_gracas.isChecked())
+                if (comunhao.isChecked())
                     musicaViewModel.insertMusica(10, number, name);
 
-                if (final_.isChecked())
+                if (accao_gracas.isChecked())
                     musicaViewModel.insertMusica(11, number, name);
+
+                if (final_.isChecked())
+                    musicaViewModel.insertMusica(12, number, name);
             }
 
             AlertDialog dialog = new AlertDialog.Builder(this).create();

@@ -25,5 +25,7 @@ public class GenerateProgramUnitTest {
         Intent expectedIntent = new Intent(mainActivity, ProgramaActivity.class);
         Intent actual = ShadowApplication.getInstance().getNextStartedActivity();
         assertEquals(expectedIntent.getComponent(), actual.getComponent());
+
+
     }
 }

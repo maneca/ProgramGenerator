@@ -17,6 +17,7 @@
     <string name="aleluia">Aleluia</string>
     <string name="salmo">Salmo</string>
     <string name="acto_penitencial">Acto Penitencial</string>
+    <string name="gloria">Glória</string>
     <string name="ofertorio">Ofertório</string>
     <string name="santo">Santo</string>
     <string name="pai_nosso">Pai-Nosso</string>
@@ -37,6 +38,7 @@
 
     <string-array name="parts_array">
         <item>Acto Penitencial</item>
+        <item>Glória</item>
         <item>Salmo</item>
         <item>Pai-nosso</item>
         <item>Acção de Graças</item>

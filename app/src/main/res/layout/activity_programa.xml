@@ -50,6 +50,26 @@
             </TextView>
         </TableRow>
 
+        <TableRow android:id="@+id/row_gloria"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/gloria_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_marginEnd="10dp"
+                android:textColor="#A4C739"
+                android:textStyle="bold"
+                android:text="@string/gloria"/>
+
+            <TextView
+                android:id="@+id/gloria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge">
+            </TextView>
+        </TableRow>
+
         <TableRow android:id="@+id/row_salmo"
             android:padding="10dp">
             <TextView

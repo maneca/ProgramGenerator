@@ -39,9 +39,11 @@ class DatabaseModule {
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
                         contentValues.put("name", "Acto Penitencial");
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
+                        contentValues.put("name", "Glória");
+                        db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
                         contentValues.put("name", "Salmo");
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
-                        contentValues.put("name", "Aleluia");
+                        contentValues.put("name", "Aclamação");
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
                         contentValues.put("name", "Ofertório");
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
@@ -57,6 +59,7 @@ class DatabaseModule {
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
                         contentValues.put("name", "Final");
                         db.insert("PartesEucaristia", OnConflictStrategy.IGNORE, contentValues);
+
                     }
 
                     @Override
@@ -66,6 +69,7 @@ class DatabaseModule {
                 })
                 .build();
     }
+
 
     @Singleton @Provides
     MusicaDao provideMusicaDao(AppDatabase db) {

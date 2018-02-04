@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_action_refresh"
         yourapp:showAsAction="always"/>
 
+    <item android:id="@+id/action_export"
+        android:title="Export"
+        android:icon="@drawable/ic_action_export"
+        yourapp:showAsAction="always"/>
+
 </menu>

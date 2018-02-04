@@ -102,12 +102,12 @@
         android:focusable="true"
         android:gravity="center"
         android:hint="@string/salmo"
-        app:layout_constraintBaseline_toBaselineOf="@+id/aleluia"
-        app:layout_constraintEnd_toStartOf="@+id/aleluia"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gloria"
+        app:layout_constraintEnd_toStartOf="@+id/gloria"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckedTextView
-        android:id="@+id/aleluia"
+        android:id="@+id/gloria"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -116,76 +116,76 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:hint="@string/aleluia"
+        android:hint="@string/gloria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/salmo"
         app:layout_constraintTop_toBottomOf="@+id/entrada" />
 
 
     <CheckedTextView
+        android:id="@+id/aleluia"
+        android:layout_width="0dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="20dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/aleluia"
+        app:layout_constraintEnd_toStartOf="@+id/gloria"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/salmo" />
+
+    <CheckedTextView
         android:id="@+id/ofertorio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginEnd="8dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="false"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
         android:hint="@string/ofertorio"
-        app:layout_constraintBaseline_toBaselineOf="@+id/santo"
-        app:layout_constraintEnd_toStartOf="@+id/santo"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/aleluia"
+        app:layout_constraintTop_toBottomOf="@+id/gloria" />
+
 
     <CheckedTextView
         android:id="@+id/santo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="false"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
         android:hint="@string/santo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ofertorio"
-        app:layout_constraintTop_toBottomOf="@+id/salmo" />
-
+        app:layout_constraintEnd_toStartOf="@+id/ofertorio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aleluia" />
 
     <CheckedTextView
         android:id="@+id/pai_nosso"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginEnd="8dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="false"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
         android:hint="@string/pai_nosso"
-        app:layout_constraintBaseline_toBaselineOf="@+id/paz"
-        app:layout_constraintEnd_toStartOf="@+id/paz"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckedTextView
-        android:id="@+id/paz"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-        android:checked="false"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:hint="@string/paz"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pai_nosso"
+        app:layout_constraintStart_toEndOf="@+id/santo"
         app:layout_constraintTop_toBottomOf="@+id/ofertorio" />
 
 
     <CheckedTextView
-        android:id="@+id/comunhao"
+        android:id="@+id/paz"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -194,13 +194,13 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:hint="@string/comunhao"
-        app:layout_constraintBaseline_toBaselineOf="@+id/accao_gracas"
-        app:layout_constraintEnd_toStartOf="@+id/accao_gracas"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:hint="@string/paz"
+        app:layout_constraintEnd_toStartOf="@+id/pai_nosso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/santo" />
 
     <CheckedTextView
-        android:id="@+id/accao_gracas"
+        android:id="@+id/comunhao"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -209,24 +209,39 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:hint="@string/accao_gracas"
+        android:hint="@string/comunhao"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/comunhao"
+        app:layout_constraintStart_toEndOf="@+id/paz"
         app:layout_constraintTop_toBottomOf="@+id/pai_nosso" />
 
+    <CheckedTextView
+        android:id="@+id/accao_gracas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/accao_gracas"
+        app:layout_constraintEnd_toStartOf="@+id/comunhao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paz" />
 
     <CheckedTextView
         android:id="@+id/final_"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="false"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
         android:hint="@string/final_"
-        app:layout_constraintEnd_toEndOf="@+id/accao_gracas"
-        app:layout_constraintStart_toStartOf="@+id/comunhao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/accao_gracas"
         app:layout_constraintTop_toBottomOf="@+id/comunhao" />
 
 

@@ -69,46 +69,51 @@ public class ListaMusicasActivity extends AppCompatActivity implements Injectabl
         });
 
         listaMusicasViewModel.getMusicasForParte(3).observe(this, musicas -> {
-            listDataChild.put("Salmo", musicas);
+            listDataChild.put("Glória", musicas);
             listAdapter.notifyDataSetChanged();
         });
 
         listaMusicasViewModel.getMusicasForParte(4).observe(this, musicas -> {
-            listDataChild.put("Aleluia", musicas);
+            listDataChild.put("Salmo", musicas);
             listAdapter.notifyDataSetChanged();
         });
 
         listaMusicasViewModel.getMusicasForParte(5).observe(this, musicas -> {
-            listDataChild.put("Ofertório", musicas);
+            listDataChild.put("Aleluia", musicas);
             listAdapter.notifyDataSetChanged();
         });
 
         listaMusicasViewModel.getMusicasForParte(6).observe(this, musicas -> {
-            listDataChild.put("Santo", musicas);
+            listDataChild.put("Ofertório", musicas);
             listAdapter.notifyDataSetChanged();
         });
 
         listaMusicasViewModel.getMusicasForParte(7).observe(this, musicas -> {
-            listDataChild.put("Pai-nosso", musicas);
+            listDataChild.put("Santo", musicas);
             listAdapter.notifyDataSetChanged();
         });
 
         listaMusicasViewModel.getMusicasForParte(8).observe(this, musicas -> {
-            listDataChild.put("Paz", musicas);
+            listDataChild.put("Pai-nosso", musicas);
             listAdapter.notifyDataSetChanged();
         });
 
         listaMusicasViewModel.getMusicasForParte(9).observe(this, musicas -> {
-            listDataChild.put("Comunhão", musicas);
+            listDataChild.put("Paz", musicas);
             listAdapter.notifyDataSetChanged();
         });
 
         listaMusicasViewModel.getMusicasForParte(10).observe(this, musicas -> {
-            listDataChild.put("Acção de Graças", musicas);
+            listDataChild.put("Comunhão", musicas);
             listAdapter.notifyDataSetChanged();
         });
 
         listaMusicasViewModel.getMusicasForParte(11).observe(this, musicas -> {
+            listDataChild.put("Acção de Graças", musicas);
+            listAdapter.notifyDataSetChanged();
+        });
+
+        listaMusicasViewModel.getMusicasForParte(12).observe(this, musicas -> {
             listDataChild.put("Final", musicas);
             listAdapter.notifyDataSetChanged();
         });

@@ -1,15 +1,21 @@
 package joao.programgenerator.activities;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -25,7 +31,7 @@ import joao.programgenerator.viewmodel.ListaMusicasViewModel;
 
 public class ProgramaActivity extends AppCompatActivity implements Injectable{
     public static final String PREFS_NAME = "MyPrefsFile";
-    private TextView entrada, aleluia, acto_penitencial, salmo, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_;
+    private TextView entrada, aleluia, acto_penitencial, salmo, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_, gloria;
     private String nome_numero;
 
     @Inject
@@ -43,6 +49,8 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
 
         entrada = findViewById(R.id.entrada);
         aleluia = findViewById(R.id.aleluia);
+        gloria = findViewById(R.id.gloria);
+        TextView gloria_label = findViewById(R.id.gloria_label);
         acto_penitencial = findViewById(R.id.acto_penitencial);
         TextView acto_penitencial_label = findViewById(R.id.acto_penitencial_label);
         salmo = findViewById(R.id.salmo);
@@ -58,6 +66,7 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
         final_ = findViewById(R.id.last);
 
         TableRow row1 = findViewById(R.id.row_acto);
+        TableRow row5 = findViewById(R.id.row_gloria);
         TableRow row2 = findViewById(R.id.row_pai_nosso);
         TableRow row3 = findViewById(R.id.row_accao_gracas);
         TableRow row4 = findViewById(R.id.row_salmo);
@@ -66,6 +75,9 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
         row1.setVisibility(View.GONE);
         acto_penitencial.setVisibility(View.GONE);
         acto_penitencial_label.setVisibility(View.GONE);
+        row5.setVisibility(View.GONE);
+        gloria.setVisibility(View.GONE);
+        gloria_label.setVisibility(View.GONE);
         row2.setVisibility(View.GONE);
         pai_nosso.setVisibility(View.GONE);
         pai_nosso_label.setVisibility(View.GONE);
@@ -87,20 +99,25 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
                 acto_penitencial.setVisibility(View.VISIBLE);
             }
 
-            if(seleccionados.contains(1)) {
+            if(seleccionados.contains(1)){
+                row5.setVisibility(View.VISIBLE);
+                gloria_label.setVisibility(View.VISIBLE);
+                gloria.setVisibility(View.VISIBLE);
+            }
+
+            if(seleccionados.contains(2)) {
                 row4.setVisibility(View.VISIBLE);
                 salmo_label.setVisibility(View.VISIBLE);
                 salmo.setVisibility(View.VISIBLE);
             }
 
-
-            if(seleccionados.contains(2)){
+            if(seleccionados.contains(3)){
                 row2.setVisibility(View.VISIBLE);
                 pai_nosso_label.setVisibility(View.VISIBLE);
                 pai_nosso.setVisibility(View.VISIBLE);
             }
 
-            if(seleccionados.contains(3)) {
+            if(seleccionados.contains(4)) {
                 row3.setVisibility(View.VISIBLE);
                 accao_gracas_label.setVisibility(View.VISIBLE);
                 accao_gracas.setVisibility(View.VISIBLE);
@@ -125,10 +142,50 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
 
                 return true;
 
+            case R.id.action_export:
+
+                exportSetList();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void exportSetList(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+
+        View view = inflater.inflate(R.layout.dialog_export, null);
+
+        builder.setView(view)
+                .setTitle("Export setlist")
+                // Add action buttons
+                .setPositiveButton("Export", (dialog, id) -> {
+
+                    EditText textView = view.findViewById(R.id.file_name);
+
+                    String filename = textView.getText().toString();
+                    String string = "Hello world!";
+                    FileOutputStream outputStream;
+
+                    Log.d("cenas", filename);
+
+                    try {
+                        outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+                        outputStream.write(string.getBytes());
+                        outputStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                })
+                .setNegativeButton("Cancel", (dialog, id) -> {
+
+                });
+        builder.create();
+        builder.show();
     }
 
     private void generatePrograma(){
@@ -138,22 +195,22 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
         Musica prog_entrada = returnMusic(1);
         programa.add(prog_entrada);
 
-        Musica prog_aleluia = solveDuplicate(returnMusic(4), programa, 4);
+        Musica prog_aleluia = solveDuplicate(returnMusic(5), programa, 5);
         programa.add(prog_aleluia);
 
-        Musica prog_ofertorio = solveDuplicate(returnMusic(5), programa, 5);
+        Musica prog_ofertorio = solveDuplicate(returnMusic(6), programa, 6);
         programa.add(prog_ofertorio);
 
-        Musica prog_santo = solveDuplicate(returnMusic(6), programa, 6);
+        Musica prog_santo = solveDuplicate(returnMusic(7), programa, 7);
         programa.add(prog_santo);
 
-        Musica prog_paz = solveDuplicate(returnMusic(8), programa, 8);
+        Musica prog_paz = solveDuplicate(returnMusic(9), programa, 9);
         programa.add(prog_paz);
 
-        Musica prog_comunhao = solveDuplicate(returnMusic(9), programa, 9);
+        Musica prog_comunhao = solveDuplicate(returnMusic(10), programa, 10);
         programa.add(prog_comunhao);
 
-        Musica prog_final = solveDuplicate(returnMusic(11), programa, 11);
+        Musica prog_final = solveDuplicate(returnMusic(12), programa, 12);
         programa.add(prog_final);
 
         if(prog_entrada == null)
@@ -182,8 +239,20 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
             }else acto_penitencial.setText(String.valueOf(prog_acto.getMusic_number()));
         }
 
+        if(gloria.getVisibility() == View.VISIBLE){
+            Musica prog_acto = solveDuplicate(returnMusic(3), programa, 3);
+            programa.add(prog_acto);
+
+            if( prog_acto == null)
+                gloria.setText(getResources().getString(R.string.nd));
+            else if(nome_numero.equalsIgnoreCase("Nome")) {
+                gloria.setText(prog_acto.getMusic_name());
+                gloria.setTextSize(14);
+            }else acto_penitencial.setText(String.valueOf(prog_acto.getMusic_number()));
+        }
+
         if(salmo.getVisibility() == View.VISIBLE){
-            Musica prog_salmo = solveDuplicate(returnMusic(3), programa, 3);
+            Musica prog_salmo = solveDuplicate(returnMusic(4), programa, 4);
             programa.add(prog_salmo);
 
             if( prog_salmo == null)
@@ -209,7 +278,7 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
         }else santo.setText(String.valueOf(prog_santo.getMusic_number()));
 
         if(pai_nosso.getVisibility() == View.VISIBLE){
-            Musica prog_pai_nosso = solveDuplicate(returnMusic(7), programa, 7);
+            Musica prog_pai_nosso = solveDuplicate(returnMusic(8), programa, 8);
             programa.add(prog_pai_nosso);
 
             if(prog_pai_nosso == null)
@@ -235,7 +304,7 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
         }else comunhao.setText(String.valueOf(prog_comunhao.getMusic_number()));
 
         if(accao_gracas.getVisibility() == View.VISIBLE){
-            Musica prog_accao_gracas = solveDuplicate(returnMusic(10), programa, 10);
+            Musica prog_accao_gracas = solveDuplicate(returnMusic(11), programa, 11);
             programa.add(prog_accao_gracas);
 
             if(prog_accao_gracas == null)
