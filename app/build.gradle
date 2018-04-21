@@ -3,10 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            //keyAlias 'MyAndroidKey'
-            //keyPassword 'maneca'
-            //storeFile file('C:/Users/Joao/AndroidStudioProjects/my_keystore.jks')
-            //storePassword 'maneca'
+
         }
     }
     compileSdkVersion 26
