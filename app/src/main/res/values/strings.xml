@@ -14,7 +14,7 @@
     <string name="gerar_programa">Gerar Programa</string>
     <string name="gerar_programa_especial">Gerar Programa Especial</string>
     <string name="entrada">Entrada</string>
-    <string name="aleluia">Aleluia</string>
+    <string name="aleluia">Aclamação</string>
     <string name="salmo">Salmo</string>
     <string name="acto_penitencial">Acto Penitencial</string>
     <string name="gloria">Glória</string>
@@ -51,4 +51,16 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_settings_fragment">SettingsFragment</string>
 
+    <string name="entrada_export">Entrada: %1$s\n</string>
+    <string name="aleluia_export">Aclamação: %1$s\n</string>
+    <string name="acto_export">Acto Penitencial: %1$s\n</string>
+    <string name="gloria_export">Glória: %1$s\n</string>
+    <string name="salmo_export">Salmo: %1$s\n</string>
+    <string name="ofertorio_export">Ofertório: %1$s\n</string>
+    <string name="santo_export">Santo: %1$s\n</string>
+    <string name="pai_nosso_export">Pai-Nosso: %1$s\n</string>
+    <string name="paz_export">Paz: %1$s\n</string>
+    <string name="comunhao_export">Comunhão: %1$s\n</string>
+    <string name="accao_export">Acção de Graças: %1$s\n</string>
+    <string name="final_export">Final: %1$s\n</string>
 </resources>

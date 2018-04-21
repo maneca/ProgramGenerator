@@ -2,20 +2,19 @@ package joao.programgenerator.activities;
 
 import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,12 +26,14 @@ import joao.programgenerator.dependencyInjection.Injectable;
 import joao.programgenerator.dependencyInjection.ViewModelFactory;
 import joao.programgenerator.pojos.Musica;
 import joao.programgenerator.viewmodel.ListaMusicasViewModel;
+import joao.programgenerator.viewmodel.ProgramaViewModel;
 
 
 public class ProgramaActivity extends AppCompatActivity implements Injectable{
     public static final String PREFS_NAME = "MyPrefsFile";
     private TextView entrada, aleluia, acto_penitencial, salmo, ofertorio, santo, pai_nosso, paz, comunhao, accao_gracas, final_, gloria;
     private String nome_numero;
+    private TableLayout tableLayout;
 
     @Inject
     ViewModelFactory viewModelFactory;
@@ -46,7 +47,7 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
         nome_numero = sharedPreferences.getString("nome_numero", "Numero");
 
-
+        tableLayout = findViewById(R.id.tableLayout);
         entrada = findViewById(R.id.entrada);
         aleluia = findViewById(R.id.aleluia);
         gloria = findViewById(R.id.gloria);
@@ -168,18 +169,45 @@ public class ProgramaActivity extends AppCompatActivity implements Injectable{
                     EditText textView = view.findViewById(R.id.file_name);
 
                     String filename = textView.getText().toString();
-                    String string = "Hello world!";
-                    FileOutputStream outputStream;
+                    ProgramaViewModel programaViewModel = ViewModelProviders.of(this, viewModelFactory).get(ProgramaViewModel.class);
 
-                    Log.d("cenas", filename);
+                    String entrada_export = String.format(getResources().getString(R.string.entrada_export), entrada.getText().toString());
+                    String aleluia_export = String.format(getResources().getString(R.string.aleluia_export), aleluia.getText().toString());
 
-                    try {
-                        outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-                        outputStream.write(string.getBytes());
-                        outputStream.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    String acto_export = "";
+                    if(acto_penitencial.getVisibility() == View.VISIBLE)
+                        acto_export = String.format(getResources().getString(R.string.acto_export), acto_penitencial.getText().toString());
+
+                    String gloria_export = "";
+                    if(gloria.getVisibility() == View.VISIBLE)
+                        gloria_export = String.format(getResources().getString(R.string.gloria_export), gloria.getText().toString());
+
+                    String salmo_export = "";
+                    if(salmo.getVisibility() == View.VISIBLE)
+                        salmo_export = String.format(getResources().getString(R.string.salmo_export), salmo.getText().toString());
+
+                    String ofertorio_export = String.format(getResources().getString(R.string.ofertorio_export), ofertorio.getText().toString());
+                    String santo_export = String.format(getResources().getString(R.string.santo_export), santo.getText().toString());
+
+                    String pai_nosso_export = "";
+                    if(pai_nosso.getVisibility() == View.VISIBLE)
+                        pai_nosso_export = String.format(getResources().getString(R.string.pai_nosso_export), pai_nosso.getText().toString());
+
+                    String paz_export = String.format(getResources().getString(R.string.paz_export), paz.getText().toString());
+                    String comunhao_export = String.format(getResources().getString(R.string.comunhao_export), comunhao.getText().toString());
+
+                    String accao_export = "";
+                    if(accao_gracas.getVisibility() == View.VISIBLE)
+                        accao_export = String.format(getResources().getString(R.string.accao_export), accao_gracas.getText().toString());
+
+                    String final_export = String.format(getResources().getString(R.string.final_export), final_.getText().toString());
+
+                    boolean saved = programaViewModel.exportProgram(filename, entrada_export, aleluia_export, gloria_export, acto_export, salmo_export, ofertorio_export,
+                                                                    santo_export, pai_nosso_export, paz_export, comunhao_export, accao_export, final_export);
+
+                    if(saved)
+                         Snackbar.make(tableLayout,"Exportado com sucesso", Snackbar.LENGTH_LONG).show();
+                    else Snackbar.make(tableLayout,"Erro a exportar", Snackbar.LENGTH_LONG).show();
                 })
                 .setNegativeButton("Cancel", (dialog, id) -> {
 
